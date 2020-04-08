@@ -1,0 +1,94 @@
+PROTO coloredCap[
+  field SFFloat   capRadius          0.0675            # [0, inf)
+  field SFVec3f   translation        0 0.094 0         # any vector
+]
+{
+  %{
+    local cr = fields.capRadius.value
+
+    local bigR = 0.085
+    local centerR = 0.025
+    local cornerR = 0.02
+
+    local firstDist = 0.035
+    local secondDist = 0.054772
+  }%
+  Transform {
+    translation IS translation
+    rotation 0 1 0 3.14159
+    children [
+      Shape {
+        appearance PBRAppearance {
+          baseColor 0 0 0
+          roughness 1
+          metalness 0
+        }
+        geometry DEF bigCircle Cylinder {
+          height 0.0001
+          radius %{=cr}%
+          subdivision 30
+        }
+      }
+      Shape {
+        appearance DEF circleBlue PBRAppearance {
+          baseColor 0.2 0 0.6
+          roughness 1
+          metalness 0
+        }
+        geometry DEF centerCircle Cylinder {
+          height 0.0002
+          radius %{=centerR * cr / bigR}%
+          subdivision 30
+        }
+      }
+      Transform {
+        translation %{=-cr * secondDist / bigR}% 0 %{=-cr * firstDist / bigR}%
+        children [
+          Shape {
+            appearance DEF circlePink PBRAppearance {
+              baseColor 1 0 1
+              roughness 1
+              metalness 0
+            }
+            geometry DEF cornerCircle Cylinder {
+              height 0.0002
+              radius %{=cornerR * cr / bigR}%
+              subdivision 30
+            }
+          }
+        ]
+      }
+      Transform {
+        translation %{=cr * secondDist / bigR}% 0 %{=-cr * firstDist / bigR}%
+        children [
+          Shape {
+            appearance USE circlePink
+            geometry USE cornerCircle
+          }
+        ]
+      }
+      Transform {
+        translation %{=-cr * firstDist / bigR}% 0 %{=cr * secondDist / bigR}%
+        children [
+          Shape {
+            appearance USE circlePink
+            geometry USE cornerCircle
+          }
+        ]
+      }
+      Transform {
+        translation %{=cr * firstDist / bigR}% 0 %{=cr * secondDist / bigR}%
+        children [
+          Shape {
+            appearance DEF circleGreen PBRAppearance {
+              baseColor 0 0.9 0
+              roughness 1
+              metalness 0
+            }
+            geometry USE cornerCircle
+          }
+        ]
+      }
+    ]
+  }
+}

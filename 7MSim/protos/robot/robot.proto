@@ -1,0 +1,151 @@
+PROTO robot[
+  field SFVec3f    translation    0 0 0          # (-inf, inf)
+]
+{
+  Robot {
+    translation IS translation
+    children [
+      coloredCap {
+      }
+      Transform {
+        translation 0 0.0675 0
+        rotation 0 1 0 3.141592653589793
+        children [
+          cap {
+          }
+          body {
+          }
+          bottom {
+          }
+        ]
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          anchor 0.035 0.02247 0
+        }
+        device [
+          RotationalMotor {
+            name "leftMotor"
+          }
+        ]
+        endPoint Solid {
+          translation 0 0.0675 0
+          rotation 0 0 1 4.6928012867022945e-06
+          children [
+            Transform {
+              rotation 0 1 0 3.141592653589793
+              children [
+                lWheel {
+                }
+              ]
+            }
+          ]
+          boundingObject Transform {
+            rotation 0 1 0 3.141592653589793
+            children [
+              lWheel {
+              }
+            ]
+          }
+          physics Physics {
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          anchor -0.035 0.02247 0
+        }
+        device [
+          RotationalMotor {
+            name "rightMotor"
+          }
+        ]
+        endPoint Solid {
+          translation 0 0.0675 0
+          rotation 1 0 0 0
+          children [
+            Transform {
+              rotation 0 1 0 3.141592653589793
+              children [
+                rWheel {
+                }
+              ]
+            }
+          ]
+          name "solid(1)"
+          boundingObject Transform {
+            rotation 0 1 0 3.141592653589793
+            children [
+              rWheel {
+              }
+            ]
+          }
+          physics Physics {
+          }
+        }
+      }
+      smallWheel {
+        translation 0 0.006 0.039
+      }
+      smallWheel {
+        translation 0 0.006 -0.039
+      }
+    ]
+    name "robot(1)"
+    boundingObject Group {
+      children [
+        Transform {
+          translation 0 0.0825 0
+          children [
+            Cylinder {
+              height 0.023
+              radius 0.0675
+              subdivision 30
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.0675 0
+          rotation 0 1 0 3.141592653589793
+          children [
+            body {
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.0165 0
+          children [
+            Box {
+              size 0.069 0.001 0.09
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.006 0.039
+          children [
+            DEF smallBall Shape {
+              geometry Sphere {
+                radius 0.006
+                subdivision 5
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.006 -0.039
+          children [
+            USE smallBall
+          ]
+        }
+      ]
+    }
+    physics Physics {
+      density -1
+      mass 0.522
+      centerOfMass [
+        0 0.053 0
+      ]
+    }
+    controller "robotController"
+  }
+}

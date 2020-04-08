@@ -1,0 +1,57 @@
+PROTO wall [
+  field SFString   name         "wall"            # any string
+
+  field SFFloat    length       9.6               # [0, inf)
+  field SFFloat    width        6.6               # [0, inf)
+  field SFFloat    height        0.5               # [0, inf)
+  field SFFloat    thickness    0.1               # [0, inf)
+]
+{
+  %{
+    local l = fields.length.value 
+    local w = fields.width.value
+    local h = fields.height.value
+    local t = fields.thickness.value
+
+    local floorLength = 10.4
+    local floorWidth = 7.4 
+
+    local fieldLength = 9.6
+    local fieldWidth = 6.6    
+  }%
+  Solid {
+    name IS name
+    boundingObject Group {
+      children [
+        Transform {
+          translation 0 %{=h / 2}% %{=w * floorWidth / (2 * fieldWidth)}%
+          children [
+            DEF XWall Box {
+              size %{=l * floorLength / fieldLength}% %{=h}% %{=t}%
+            }
+          ]
+        }
+        Transform {
+          translation 0 %{=h / 2}% %{=-w * floorWidth / (2 * fieldWidth)}%
+          children [
+            USE XWall
+          ]
+        }
+        Transform {
+          translation %{=l * floorLength / (2 * fieldLength)}% %{=h / 2}% 0
+          children [
+            DEF YWall Box {
+              size %{=t}% %{=h}% %{=w * floorWidth / fieldWidth}%
+            }
+          ]
+        }
+        Transform {
+          translation %{=-l * floorLength / (2 * fieldLength)}% %{=h / 2}% 0
+          children [
+            USE YWall
+          ]
+        }
+      ]
+    }
+  }
+}

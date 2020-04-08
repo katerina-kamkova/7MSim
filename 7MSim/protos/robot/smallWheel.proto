@@ -1,0 +1,33 @@
+PROTO smallWheel[
+  field SFVec3f      translation    0 0 0         # any vector
+]
+{
+  Transform {
+    translation IS translation
+    children [
+      DEF smallBall Shape {
+        appearance PBRAppearance {
+        }
+        geometry Sphere {
+          radius 0.006
+          subdivision 5
+        }
+      }
+      Transform {
+        translation 0 0.0032 0
+        children [
+          Shape {
+            appearance PBRAppearance {
+              roughness 1
+              metalness 0
+            }
+            geometry Cylinder {
+              height 0.0132
+              radius 0.007
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

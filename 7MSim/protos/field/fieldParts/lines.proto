@@ -1,0 +1,247 @@
+PROTO lines [
+  field SFString   name                 "lines"           # any string
+
+  field SFFloat    length               9.6               # [0, inf)
+  field SFFloat    width                6.6               # [0, inf)
+  field SFFloat    thickness            0.04              # [0, inf)
+]
+{
+  %{
+    local l = fields.length.value
+    local w = fields.width.value
+    local t = fields.thickness.value
+
+    local fl = 9.6              -- field length
+    local fw = 6.6              -- field width
+
+    local pfl = 9               -- play field length
+    local pfw = 6               -- play field width
+
+    local gw = 1                -- gates width
+    local gd = 0.1              -- gates depth
+
+    local gaw = 2               -- goal area width
+    local gad = 1               -- goal area depth
+
+    local scr = 0.1             -- small circle radius
+    local bcr = 0.5             -- big circle radius
+    local bcs = 24              -- big circle subdivision
+
+    local lineHight = 0.001
+  }%
+  Group {
+    children [
+      DEF SmallXline Shape {
+        appearance DEF SmallLineColour PBRAppearance {
+          roughness 1
+          metalness 0
+        }
+        geometry IndexedFaceSet {
+          coord Coordinate {
+            point [
+              %{=l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=t / 2}%
+              %{=l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=-t / 2}%
+              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=-t / 2}%
+              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=t / 2}%
+            ]
+          }
+          coordIndex [
+            0, 1, 2, 3
+          ]
+        }
+      }
+      Transform {
+        translation 0 0 %{=w * pfw / (2 * fw)}%
+        children [
+          USE SmallXline
+        ]
+      }
+      Transform {
+        translation 0 0 %{=-w * pfw / (2 * fw)}%
+        children [
+          USE SmallXline
+        ]
+      }
+      DEF SmallZline Shape {
+        appearance USE SmallLineColour
+        geometry IndexedFaceSet {
+          coord Coordinate {
+            point [
+              %{=t / 2}% %{=lineHight}% %{=w * pfw / (2 * fw) + (t / 2)}%
+              %{=t / 2}% %{=lineHight}% %{=-w * pfw / (2 * fw) - (t / 2)}%
+              %{=-t / 2}% %{=lineHight}% %{=-w * pfw / (2 * fw) - (t / 2)}%
+              %{=-t / 2}% %{=lineHight}% %{=w * pfw / (2 * fw) + (t / 2)}%
+            ]
+          }
+          coordIndex [
+            0, 1, 2, 3
+          ]
+        }
+      }
+      Transform {
+        translation %{=l * pfl / (2 * fl)}% 0 0
+        children [
+          USE SmallZline
+        ]
+      }
+      Transform {
+        translation %{=-l * pfl / (2 * fl)}% 0 0
+        children [
+          USE SmallZline
+        ]
+      }
+      DEF BigXline Shape {
+        appearance DEF BigLineClolour PBRAppearance {
+          baseColor 0 0 0
+          roughness 1
+          metalness 0
+        }
+        geometry IndexedFaceSet {
+          coord Coordinate {
+            point [
+              %{=(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w + (t * 1.5)) / 2}%
+              %{=(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w - (t * 1.5)) / 2}%
+              %{=-(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w - (t * 1.5)) / 2}%
+              %{=-(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w + (t * 1.5)) / 2}%
+            ]
+          }
+          coordIndex [
+            0, 1, 2, 3
+          ]
+        }
+      }
+      Transform {
+        translation 0 0 %{=-w}%
+        children [
+          USE BigXline
+        ]
+      }
+      DEF BigZline Shape {
+        appearance USE BigLineClolour
+        geometry IndexedFaceSet {
+          coord Coordinate {
+            point [
+              %{=(l + (t * 1.5)) / 2}% %{=lineHight}% %{=-(w + (t * 1.5)) / 2}%
+              %{=(l - (t * 1.5)) / 2}% %{=lineHight}% %{=-(w + (t * 1.5)) / 2}%
+              %{=(l - (t * 1.5)) / 2}% %{=lineHight}% %{=(w + (t * 1.5)) / 2}%
+              %{=(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w + (t * 1.5)) / 2}%
+            ]
+          }
+          coordIndex [
+            0, 1, 2, 3
+          ]
+        }
+      }
+      Transform {
+        translation %{=-l}% 0 0
+        children [
+          USE BigZline
+        ]
+      }
+      DEF GoalArea Shape {
+        appearance USE SmallLineColour
+        geometry IndexedFaceSet {
+          coord Coordinate {
+            point [
+              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=w * gaw / (2 * fw) + (t / 2)}%
+              %{=-l * pfl / (2 * fl) + (t / 2) + (l * gad / fl)}% %{=lineHight}% %{=w * gaw / (2 * fw) + (t / 2)}%
+              %{=-l * pfl / (2 * fl) + (t / 2) + (l * gad / fl)}% %{=lineHight}% %{=-w * gaw / (2 * fw) - (t / 2)}%
+              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=-w * gaw / (2 * fw) - (t / 2)}%
+              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=-w * gaw / (2 * fw) + (t / 2)}%
+              %{=-l * pfl / (2 * fl) - (t / 2) + (l * gad / fl)}% %{=lineHight}% %{=-w * gaw / (2 * fw) + (t / 2)}%
+              %{=-l * pfl / (2 * fl) - (t / 2) + (l * gad / fl)}% %{=lineHight}% %{=w * gaw / (2 * fw) - (t / 2)}%  
+              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=w * gaw / (2 * fw) - (t / 2)}%
+            ]
+          }
+          coordIndex [
+            0, 1, 2, 3, 4, 5, 6, 7
+          ]
+        }
+      }
+      Transform {
+        rotation 0 1 0 %{=math.pi}%
+        children [
+          USE GoalArea
+        ]
+      }
+      DEF Gates Shape {
+        appearance USE SmallLineColour
+        geometry IndexedFaceSet {
+          coord Coordinate {
+            point [
+              %{=-l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=w * gw / (2 * fw) + (t / 2)}%
+              %{=-l * pfl / (2 * fl) - (t / 2) - (l * gd / fl)}% %{=lineHight}% %{=w * gw / (2 * fw) + (t / 2)}%
+              %{=-l * pfl / (2 * fl) - (t / 2) - (l * gd / fl)}% %{=lineHight}% %{=-w * gw / (2 * fw) - (t / 2)}%
+              %{=-l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=-w * gw / (2 * fw) - (t / 2)}%
+              %{=-l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=-w * gw / (2 * fw) + (t / 2)}%
+              %{=-l * pfl / (2 * fl) + (t / 2) - (l * gd / fl)}% %{=lineHight}% %{=-w * gw / (2 * fw) + (t / 2)}%
+              %{=-l * pfl / (2 * fl) + (t / 2) - (l * gd / fl)}% %{=lineHight}% %{=w * gw / (2 * fw) - (t / 2)}%
+              %{=-l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=w * gw / (2 * fw) - (t / 2)}%
+            ]
+          }
+          coordIndex [
+            7, 6, 5, 4, 3, 2, 1, 0
+          ]
+        }
+      }
+      Transform {
+        rotation 0 1 0 %{=math.pi}%
+        children [
+          USE Gates
+        ]
+      }
+      Transform {
+        translation 0 %{=lineHight}% 0
+        children [
+          Shape {
+            appearance USE SmallLineColour
+            geometry Cylinder {
+              height %{=lineHight}%
+              radius %{=math.sqrt(l * l + (w * w)) * scr / math.sqrt(fl * fl + (fw + fw)) + (t / 2)}%
+            }
+          }
+        ]
+      }
+      Transform {
+        children [
+          Shape {
+            appearance USE SmallLineColour
+            geometry IndexedFaceSet {
+              coord Coordinate {
+		point [
+                  %{
+                    for i = 0, bcs do
+                    local r = math.sqrt(l * l + (w * w)) * bcr / math.sqrt(fl * fl + (fw * fw)) + (t / 2)
+                    local x = r * math.sin(i * 2 * math.pi / bcs)
+                    local z = r * math.cos(i * 2 * math.pi / bcs)
+                  }%
+
+                  %{=x}% %{=lineHight * 2}% %{=z}%
+                  %{ end }%
+
+                  %{
+                    for i = 0, bcs do
+                    local r = math.sqrt(l * l + (w * w)) * bcr / math.sqrt(fl * fl + (fw * fw)) - (t / 2)
+                    local x = r * math.sin(i * (-2) * math.pi / bcs)
+                    local z = r * math.cos(i * (-2) * math.pi / bcs)
+                  }%
+
+                  %{=x}% %{=lineHight * 2}% %{=z}%
+                  %{ end }%
+                ]
+              }
+              coordIndex [
+                %{
+                  for i = 0, (2 * bcs + 1) do
+                }%
+        
+                %{=i}%
+                %{ end }%
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

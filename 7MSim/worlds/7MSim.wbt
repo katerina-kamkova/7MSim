@@ -2,20 +2,27 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.958335485606441 0.2706554056418453 0.09131674777561313 5.6061684056977406
-  position -2.028897521976896 5.106574058476599 7.534342979261794
+  orientation 0.9955449092606664 0.08855922569102317 0.0323666060960627 5.579504886754906
+  position -0.5344940440500564 3.1501017548302004 3.376908936265445
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-camera {
-}
-footballField {
-}
 ball {
-  translation 1.44 0.05 1.03
+  translation 0.39 0.03 0.13
+  radius 0.03
 }
 robot {
-  translation -1.06 0 1.26
+  translation -0.66 0 0.36
+}
+footballField {
+  length 3
+  width 2
+  lineThickness 0.01
+}
+camera {
+  hidden translation_0 0 9.375 0
+  length 3
+  width 2
 }

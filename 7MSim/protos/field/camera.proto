@@ -1,8 +1,30 @@
 PROTO camera[
+  field SFFloat    length         9.6                  # [0, inf)
+  field SFFloat    width          6.6                  # [0, inf)
+
+  field SFString   controller     "cameraController"   # any string
 ]
 {
+  %{
+    local l = fields.length.value           -- football field length
+    local w = fields.width.value            -- football field width
+
+    local classicFL = 9.6                   -- classic field length
+    local classicFW = 6.6                   -- classic field width
+
+    local classicCH = 30                    -- classic camera height
+  }%
   Robot {
-  translation 0 30 0
+    %{  
+      local newCH = 0
+      do
+        if l/w >= 4/3 
+        then newCH = classicCH * l / classicFL
+        else newCH = classicCH * w / classicFW
+        end
+      end
+    }%
+    translation 0 %{=newCH}% 0
     rotation 1 0 0 -1.5707996938995747
     children [
       Camera {

@@ -2,55 +2,99 @@
 // Date:          08.04.2020
 // Description:   shows the field in the window
 // Author:        katerina kamkova
-// Modifications:
 
 #include <webots/Robot.hpp>
 #include <webots/Camera.hpp>
 
-// All the webots classes are defined in the "webots" namespace
+// For socket functions
+#include <sys/socket.h> 
+// For sockaddr_in
+#include <netinet/in.h>
+// For exit() and EXIT_FAILURE 
+#include <cstdlib> 
+// For cout
+#include <iostream> 
+// For read
+#include <unistd.h> 
+
 using namespace webots;
 
-// This is the main program of your controller.
-// It creates an instance of your Robot instance, launches its
-// function(s) and destroys it at the end of the execution.
-// Note that only one instance of Robot should be created in
-// a controller program.
-// The arguments of the main function can be specified by the
-// "controllerArgs" field of the Robot node
-int main(int argc, char **argv) {
+int main(int argc, char **argv) { 
   // create the Robot instance.
   Robot *robot = new Robot();
-
   // get the time step of the current world.
   int timeStep = (int)robot->getBasicTimeStep();
-
-  // You should insert a getDevice-like function in order to get the
-  // instance of a device of the robot. Something like:
-  //  Motor *motor = robot->getMotor("motorname");
-  //  DistanceSensor *ds = robot->getDistanceSensor("dsname");
-  //  ds->enable(timeStep);
   
   // Create a camera instance
   Camera *camera = robot->getCamera("camera");
+  camera->enable(1);  
   
-  // Turn on the camera
-  camera->enable(1);
+  /*
+  // Create a socket (IPv4, TCP)
+  int sockfd = socket(AF_INET, SOCK_STREAM, 0);
+  if (sockfd == -1) {
+    std::cout << "Failed to create socket. errno: " << errno << std::endl;
+    exit(EXIT_FAILURE);
+  }
 
+  // Listen to port 7777 on any address
+  sockaddr_in sockaddr;
+  sockaddr.sin_family = AF_INET;
+  sockaddr.sin_addr.s_addr = INADDR_ANY;
+  sockaddr.sin_port = htons(7777); // htons is necessary to convert a number to
+                                   // network byte order
+  if (bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0) {
+    std::cout << "Failed to bind to port 7777. errno: " << errno << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
+  // Start listening. Hold just 1 connection in the queue
+  if (listen(sockfd, 1) < 0) {
+    std::cout << "Failed to listen on socket. errno: " << errno << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
+  // Grab a connection from the queue
+  auto addrlen = sizeof(sockaddr);
+  int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
+  if (connection < 0) {
+    std::cout << "Failed to grab connection. errno: " << errno << std::endl;
+    exit(EXIT_FAILURE);
+  }
+
+  unsigned long long int pictureSize = camera->getWidth() * camera->getHeight() * 4;
+  bool t = true;*/
+  
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
   while (robot->step(timeStep) != -1) {
-    // Read the sensors:
-    // Enter here functions to read sensor data, like:
-    //  double val = ds->getValue();
-
-    // Process sensor data here.
-
-    // Enter here functions to send actuator commands, like:
-    //  motor->setPosition(10.0);
+    /*if (t) {
+      send(connection, &pictureSize, sizeof(unsigned long long int), 0);
+      
+      const unsigned char* picture = camera->getImage(); 
+      
+      send(connection, picture, pictureSize, 0);
+      }
+      t = false;*/
+      /*send(connection, &pictureSize, sizeof(unsigned long long int), 0);
+      unsigned char array[pictureSize];
+      for (int i = 0; i < pictureSize / 96; i++)
+      {
+        array[i] = 102;
+      }
+      for (int i = 0; i < 96; i ++)
+      {
+        send(connection, &array, pictureSize / 96, 0);
+      }*/
+    //std::string response = std::to_string(pictureSize) + "\n";
+    // send(connection, rawPicture, pictureSize, 0);
   };
 
-  // Enter here exit cleanup code.
+  // Close the connections
+  //close(connection);
+  //close(sockfd);
 
+  delete camera;
   delete robot;
   return 0;
 }

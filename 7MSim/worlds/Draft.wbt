@@ -2,25 +2,48 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.05138653106032284 -0.9980926504050667 -0.034212360821428534 5.320385474557476
-  position 1.439634581800815 0.16552588192271422 1.0693043128491615
+  orientation -0.9270716810756637 -0.26708505461658827 -0.263065907612516 1.6542264589182754
+  position 0.7233443288865249 3.0158471350193783 -0.07681142997017146
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
 }
 footballField {
-}
-camera {
+  length 3
+  width 2
+  lineThickness 0.01
 }
 ball {
-  translation 2.27 0.05 0.58
+  translation 0 0.03 0.58
+  radius 0.03
+  mass 0.05
 }
 Robot {
-  translation 1.18 0 0
+  translation 1.28 0 0.2
   rotation 0 0 1 0
   children [
-    coloredCap {
+    Transform {
+      translation 0 0.095 0
+      rotation 0 1 0 3.141592653589793
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColorMap ImageTexture {
+              url [
+                "/home/katherine/Desktop/CW/7MSim/protos/robot/caps/jpgCaps/cap0.jpg"
+              ]
+            }
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.0001
+            radius 0.0675
+            subdivision 30
+          }
+        }
+      ]
     }
     Transform {
       translation 0 0.0675 0
@@ -164,4 +187,16 @@ Robot {
   controller "robotController"
 }
 robot {
+}
+Robot {
+  translation 0 10 0
+  rotation 1 0 0 -1.5707996938995747
+  children [
+    Camera {
+      fieldOfView 0.3
+      width 1024
+      height 768
+    }
+  ]
+  controller "cameraController"
 }

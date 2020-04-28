@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation -0.9270716810756637 -0.26708505461658827 -0.263065907612516 1.6542264589182754
-  position 0.7233443288865249 3.0158471350193783 -0.07681142997017146
+  orientation 0.9816939682397484 0.18117034954169545 0.05877292887576382 5.553690933781533
+  position -0.16355879119996009 1.5741692029424936 1.6027280067623477
 }
 TexturedBackground {
 }
@@ -186,8 +186,6 @@ Robot {
   }
   controller "robotController"
 }
-robot {
-}
 Robot {
   translation 0 10 0
   rotation 1 0 0 -1.5707996938995747
@@ -199,4 +197,6 @@ Robot {
     }
   ]
   controller "cameraController"
+}
+robot {
 }

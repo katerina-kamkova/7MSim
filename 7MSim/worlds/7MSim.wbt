@@ -13,16 +13,14 @@ ball {
   translation 0.39 0.03 0.13
   radius 0.03
 }
-robot {
-  translation -0.66 0 0.36
-}
 footballField {
   length 3
   width 2
   lineThickness 0.01
 }
 camera {
-  hidden translation_0 0 9.375 0
   length 3
   width 2
+}
+robot {
 }

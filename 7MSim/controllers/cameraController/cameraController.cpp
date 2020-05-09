@@ -15,33 +15,35 @@ int main(int argc, char **argv) {
   Camera *camera = robot->getCamera("camera");
   camera->enable(1);    
   
-  int sockfd = socket(AF_INET, SOCK_STREAM, 0);
-  if (sockfd == -1) {
-    std::cout << "Failed to create socket. Errno: " << errno << std::endl;
-    exit(EXIT_FAILURE);
-  }
+  int sock = socket(AF_INET, SOCK_STREAM, 0);
+    if (sock == -1) {
+        std::cout << "Failed to create socket. Errno: " << errno << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
-  sockaddr_in sockaddr;
-  sockaddr.sin_family = AF_INET;
-  sockaddr.sin_addr.s_addr = INADDR_ANY;
-  sockaddr.sin_port = htons(7777);
-  
-  if (bind(sockfd, (struct sockaddr*)&sockaddr, sizeof(sockaddr)) < 0) {
-    std::cout << "Failed to bind to port 7777. Errno: " << errno << std::endl;
-    exit(EXIT_FAILURE);
-  }
+    sockaddr_in socket_address{};
+    socket_address.sin_family = AF_INET;
+    socket_address.sin_addr.s_addr = INADDR_ANY;
+    socket_address.sin_port = htons(7777);
 
-  if (listen(sockfd, 1) < 0) {
-    std::cout << "Failed to listen on socket. Errno: " << errno << std::endl;
-    exit(EXIT_FAILURE);
-  }
+    if (bind(sock, (struct sockaddr*)&socket_address, sizeof(sockaddr)) < 0) {
+        std::cout << "Failed to bind to port 7777. Errno: " << errno << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
-  auto addrlen = sizeof(sockaddr);
-  int connection = accept(sockfd, (struct sockaddr*)&sockaddr, (socklen_t*)&addrlen);
-  if (connection < 0) {
-    std::cout << "Failed to grab connection. Errno: " << errno << std::endl;
-    exit(EXIT_FAILURE);
-  }
+    if (listen(sock, 1) < 0) {
+        std::cout << "Failed to listen on socket. Errno: " << errno << std::endl;
+        exit(EXIT_FAILURE);
+    }
+
+    sockaddr_in client_address{};
+    auto address_length = sizeof(client_address);
+    int connection = accept(sock, (struct sockaddr*)&client_address, (socklen_t*)&address_length);
+    
+    if (connection < 0) {
+        std::cout << "Failed to grab connection. Errno: " << errno << std::endl;
+        exit(EXIT_FAILURE);
+    }
 
   
   // Main loop:
@@ -59,7 +61,7 @@ int main(int argc, char **argv) {
   };
   
   close(connection);
-  close(sockfd);
+  close(sock);
 
   delete camera;
   delete robot;

@@ -1,7 +1,8 @@
 PROTO robot[
-  field SFVec3f    translation      0 0 0          # (-inf, inf)
-  field SFString   robotNumber      "0"            # any natural number from 0 to 15
-  field SFString   name             "robot0"       # any string
+  field SFVec3f    translation      0 0 0                # (-inf, inf)
+  field SFString   robotNumber      "0"                  # any natural number from 0 to 15
+  field SFString   name             "robot0"             # any string
+  field SFString   controller       "robotController"    # any string
 ]
 {
   Robot {
@@ -25,7 +26,7 @@ PROTO robot[
       }
       HingeJoint {
         jointParameters HingeJointParameters {
-          anchor 0.035 0.02247 0
+          anchor 0.047 0.0225 0
         }
         device [
           RotationalMotor {
@@ -34,7 +35,7 @@ PROTO robot[
         ]
         endPoint Solid {
           translation 0 0.0675 0
-          rotation 0 0 1 4.6928012867022945e-06
+          rotation 1 0 0 0
           children [
             Transform {
               rotation 0 1 0 3.141592653589793
@@ -45,9 +46,12 @@ PROTO robot[
             }
           ]
           boundingObject Transform {
-            rotation 0 1 0 3.141592653589793
+            translation 0.047 -0.045 0
+            rotation 0 0 1 1.5707996938995747
             children [
-              lWheel {
+              DEF wheel Cylinder {
+                height 0.017
+                radius 0.0224
               }
             ]
           }
@@ -57,7 +61,7 @@ PROTO robot[
       }
       HingeJoint {
         jointParameters HingeJointParameters {
-          anchor -0.035 0.02247 0
+          anchor -0.047 0.0225 0
         }
         device [
           RotationalMotor {
@@ -76,12 +80,12 @@ PROTO robot[
               ]
             }
           ]
-          name "solid(1)"
+          name "solid%{=num}%"
           boundingObject Transform {
-            rotation 0 1 0 3.141592653589793
+            translation -0.047 -0.045 0
+            rotation 0 0 1 1.5707903061004251
             children [
-              rWheel {
-              }
+              USE wheel
             ]
           }
           physics Physics {
@@ -95,7 +99,7 @@ PROTO robot[
         translation 0 0.006 -0.039
       }
     ]
-    name "robot(1)"
+    name "robot%{=num}%"
     boundingObject Group {
       children [
         Transform {
@@ -150,6 +154,6 @@ PROTO robot[
         0 0.053 0
       ]
     }
-    controller "robotController"
+    controller IS controller
   }
 }

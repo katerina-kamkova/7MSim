@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.9816939682397484 0.18117034954169545 0.05877292887576382 5.553690933781533
-  position -0.16355879119996009 1.5741692029424936 1.6027280067623477
+  orientation 0.7959803141284617 0.526868259733676 0.2980355287632046 5.027342660431108
+  position -0.2601537821179182 1.0991324192890137 0.49334273170500503
 }
 TexturedBackground {
 }
@@ -20,8 +20,8 @@ ball {
   mass 0.05
 }
 Robot {
-  translation 1.28 0 0.2
-  rotation 0 0 1 0
+  translation 0.73 0.14 0.29
+  rotation 1 0 0 3.141592653589793
   children [
     Transform {
       translation 0 0.095 0
@@ -186,7 +186,7 @@ Robot {
   }
   controller "robotController"
 }
-Robot {
+DEF CCC Robot {
   translation 0 10 0
   rotation 1 0 0 -1.5707996938995747
   children [
@@ -196,7 +196,343 @@ Robot {
       height 768
     }
   ]
-  controller "cameraController"
+  controller "draftCameraController"
 }
 robot {
+}
+DEF exp Robot {
+  translation 0.5 0 0.3
+  rotation 1 0 0 0
+  children [
+    Transform {
+      translation 0 0.095 0
+      rotation 0 1 0 3.141592653589793
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColorMap ImageTexture {
+              url [
+                "/home/katherine/Desktop/CW/7MSim/protos/robot/caps/jpgCaps/cap0.jpg"
+                ""
+                ""
+              ]
+            }
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.0001
+            radius 0.0675
+            subdivision 30
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.0675 0
+      rotation 0 1 0 3.141592653589793
+      children [
+        cap {
+        }
+        body {
+        }
+        bottom {
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.047 0.0225 0
+      }
+      device [
+        RotationalMotor {
+          name "leftMotor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.0675 0
+        rotation 1 0 0 0
+        children [
+          Transform {
+            rotation 0 1 0 3.141592653589793
+            children [
+              lWheel {
+              }
+            ]
+          }
+        ]
+        boundingObject Transform {
+          translation 0.047 -0.045 0
+          rotation 0 0 1 1.5707996938995747
+          children [
+            DEF wheel Cylinder {
+              height 0.017
+              radius 0.0224
+            }
+          ]
+        }
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.047 0.0225 0
+      }
+      device [
+        RotationalMotor {
+          name "rightMotor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.0675 0
+        rotation 1 0 0 0
+        children [
+          Transform {
+            rotation 0 1 0 3.141592653589793
+            children [
+              rWheel {
+              }
+            ]
+          }
+        ]
+        name "solid(1)"
+        boundingObject Transform {
+          translation -0.047 -0.045 0
+          rotation 0 0 1 1.5707903061004251
+          children [
+            USE wheel
+          ]
+        }
+        physics Physics {
+        }
+      }
+    }
+    smallWheel {
+      translation 0 0.006 0.039
+    }
+    smallWheel {
+      translation 0 0.006 -0.039
+    }
+  ]
+  name "robot(2)"
+  boundingObject Group {
+    children [
+      Transform {
+        translation 0 0.0825 0
+        children [
+          Cylinder {
+            height 0.023
+            radius 0.0675
+            subdivision 30
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.0675 0
+        rotation 0 1 0 3.141592653589793
+        children [
+          body {
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.0165 0
+        children [
+          Box {
+            size 0.069 0.001 0.09
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.006 0.039
+        children [
+          DEF smallBall Shape {
+            geometry Sphere {
+              radius 0.006
+              subdivision 5
+            }
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.006 -0.039
+        children [
+          USE smallBall
+        ]
+      }
+    ]
+  }
+  physics Physics {
+    density -1
+    mass 0.522
+    centerOfMass [
+      0 0.053 0
+    ]
+  }
+  controller "robotController"
+}
+Robot {
+  translation 0.83 0 0.39
+  children [
+    Transform {
+      translation 0 0.095 0
+      rotation 0 1 0 3.141592653589793
+      children [
+        Shape {
+          appearance PBRAppearance {
+            baseColorMap ImageTexture {
+              url [
+                "/home/katherine/Desktop/CW/7MSim/protos/robot/caps/jpgCaps/cap0.jpg"
+              ]
+            }
+            roughness 1
+            metalness 0
+          }
+          geometry Cylinder {
+            height 0.0001
+            radius 0.0675
+            subdivision 30
+          }
+        }
+      ]
+    }
+    Transform {
+      translation 0 0.0675 0
+      rotation 0 1 0 3.141592653589793
+      children [
+        cap {
+        }
+        body {
+        }
+        bottom {
+        }
+      ]
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor 0.035 0.02247 0
+      }
+      device [
+        RotationalMotor {
+          name "leftMotor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.0675 0
+        rotation 0 0 1 4.6928012867022945e-06
+        children [
+          Transform {
+            rotation 0 1 0 3.141592653589793
+            children [
+              lWheel {
+              }
+            ]
+          }
+        ]
+        boundingObject Transform {
+          rotation 0 1 0 3.141592653589793
+          children [
+            lWheel {
+            }
+          ]
+        }
+        physics Physics {
+        }
+      }
+    }
+    HingeJoint {
+      jointParameters HingeJointParameters {
+        anchor -0.035 0.02247 0
+      }
+      device [
+        RotationalMotor {
+          name "rightMotor"
+        }
+      ]
+      endPoint Solid {
+        translation 0 0.0675 0
+        rotation 1 0 0 0
+        children [
+          Transform {
+            rotation 0 1 0 3.141592653589793
+            children [
+              rWheel {
+              }
+            ]
+          }
+        ]
+        name "solid(1)"
+        boundingObject Transform {
+          rotation 0 1 0 3.141592653589793
+          children [
+            rWheel {
+            }
+          ]
+        }
+        physics Physics {
+        }
+      }
+    }
+    smallWheel {
+      translation 0 0.006 0.039
+    }
+    smallWheel {
+      translation 0 0.006 -0.039
+    }
+  ]
+  name "robot(3)"
+  boundingObject Group {
+    children [
+      Transform {
+        translation 0 0.0825 0
+        children [
+          Cylinder {
+            height 0.023
+            radius 0.0675
+            subdivision 30
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.0675 0
+        rotation 0 1 0 3.141592653589793
+        children [
+          body {
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.0165 0
+        children [
+          Box {
+            size 0.069 0.001 0.09
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.006 0.039
+        children [
+          DEF smallBall Shape {
+            geometry Sphere {
+              radius 0.006
+              subdivision 5
+            }
+          }
+        ]
+      }
+      Transform {
+        translation 0 0.006 -0.039
+        children [
+          USE smallBall
+        ]
+      }
+    ]
+  }
+  physics Physics {
+  }
+  controller "EPuckController"
+}
+robot {
+  name "robot0(1)"
 }

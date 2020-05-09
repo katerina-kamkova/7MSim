@@ -33,6 +33,6 @@ PROTO camera[
         height 660
       }
     ]
-    controller "cameraController"
+    controller IS controller
   }
 }

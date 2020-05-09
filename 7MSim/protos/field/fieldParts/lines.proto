@@ -27,7 +27,7 @@ PROTO lines [
     local bcr = 0.5             -- big circle radius
     local bcs = 24              -- big circle subdivision
 
-    local lineHight = 0.001
+    local lineHight = 0.0001
   }%
   Group {
     children [
@@ -191,7 +191,7 @@ PROTO lines [
         ]
       }
       Transform {
-        translation 0 %{=lineHight}% 0
+        translation 0 %{=lineHight + 0.0001}% 0
         children [
           Shape {
             appearance USE SmallLineColour

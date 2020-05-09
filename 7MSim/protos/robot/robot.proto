@@ -1,5 +1,6 @@
 PROTO robot[
-  field SFVec3f    translation      0 0 0                # (-inf, inf)
+  field SFVec3f    translation      0 0 0                
+  field SFRotation rotation         0 1 0 0             
   field SFString   robotNumber      "0"                  # any natural number from 0 to 15
   field SFString   name             "robot0"             # any string
   field SFString   controller       "robotController"    # any string
@@ -8,6 +9,7 @@ PROTO robot[
   Robot {
     name IS name
     translation IS translation
+    rotation IS rotation
     children [
       coloredCap {
         robotNumber IS robotNumber

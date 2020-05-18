@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.9154460011011043 0.3539395494784093 0.19153436867313822 5.2154376728560825
-  position -1.0874081613094166 2.5435485752322817 1.4851315809577081
+  orientation 0.9921248679409443 0.0957159628920108 0.08078799948519039 4.873339883066255
+  position -0.3626722419867565 3.0739203180843457 0.5899354660209993
 }
 TexturedBackground {
   luminosity 2
@@ -11,7 +11,7 @@ TexturedBackground {
 TexturedBackgroundLight {
 }
 ball {
-  translation 0.39 0.03 0.13
+  translation 0 0.03 0.34
   radius 0.03
 }
 footballField {
@@ -22,22 +22,24 @@ footballField {
 camera {
   length 3
   width 2
-  controller "easyCameraController"
 }
 robot {
 }
 robot {
   translation 0.77 0 0
+  rotation 0 1 0 3.14159
   robotNumber "1"
   name "robot_1_1"
 }
 robot {
-  translation -0.83 0 0
+  translation -0.83 0 0.32
+  rotation 0 1 0 1.8326
   robotTeam "2"
   name "robot_2_0"
 }
 robot {
-  translation -0.36 0 -0.52
+  translation -0.79 0 -0.23
+  rotation 0 1 0 1.0472
   robotTeam "2"
   robotNumber "1"
   name "robot_2_1"

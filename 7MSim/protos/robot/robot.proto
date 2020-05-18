@@ -1,10 +1,11 @@
 PROTO robot[
   field SFVec3f    translation      0 0 0                
   field SFRotation rotation         0 1 0 0
-  field SFString   robotTeam        "1"                  # 1 or 2
-  field SFString   robotNumber      "0"                  # any natural number from 0 to 15
-  field SFString   name             "robot_1_0"          # any string
-  field SFString   controller       "robotController"    # any string
+  field SFString   robotTeam        "1"                      # 1 or 2
+  field SFString   robotNumber      "0"                      # any natural number from 0 to 15
+  field SFString   name             "robot_1_0"              # any string
+  field SFString   controller       "easyRobotController"    # any string
+  field SFBool     synchronization  TRUE                     # {TRUE, FALSE}
 ]
 {
   %{
@@ -163,5 +164,6 @@ PROTO robot[
       ]
     }
     controller IS controller
+    synchronization IS synchronization
   }
 }

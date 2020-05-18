@@ -1,9 +1,9 @@
 PROTO camera[
-  field SFFloat    length             9.6                  # [0, inf)
-  field SFFloat    width              6.6                  # [0, inf)
+  field SFFloat    length             9.6                      # [0, inf)
+  field SFFloat    width              6.6                      # [0, inf)
 
-  field SFString   controller         "cameraController"   # any string
-  field SFBool     synchronization    TRUE                 # {TRUE, FALSE}
+  field SFString   controller         "easyCameraController"   # any string
+  field SFBool     synchronization    TRUE                     # {TRUE, FALSE}
 ]
 {
   %{

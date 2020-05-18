@@ -12,7 +12,7 @@ PROTO camera[
     local classicFL = 9.6                   -- classic field length
     local classicFW = 6.6                   -- classic field width
 
-    local classicCH = 10                    -- classic camera height
+    local classicCH = 6.4                   -- classic camera height
   }%
   Robot {
     %{  
@@ -28,7 +28,7 @@ PROTO camera[
     rotation 1 0 0 -1.5707996938995747
     children [
       Camera {
-        fieldOfView 0.926
+        fieldOfView 1.36
         width 1024
         height 768
       }

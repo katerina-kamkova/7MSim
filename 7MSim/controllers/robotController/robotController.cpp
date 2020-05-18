@@ -10,11 +10,11 @@ int main(int argc, char **argv) {
   Motor *leftMotor = robot->getMotor("leftMotor");
   Motor *rightMotor = robot->getMotor("rightMotor");
  
+  leftMotor->setPosition(INFINITY);
+  rightMotor->setPosition(INFINITY);
+ 
   leftMotor->setVelocity(10);
   rightMotor->setVelocity(10);
- 
-  leftMotor->setPosition(1000.0);
-  rightMotor->setPosition(1000.0);
   
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller

@@ -1,17 +1,23 @@
 PROTO robot[
   field SFVec3f    translation      0 0 0                
-  field SFRotation rotation         0 1 0 0             
+  field SFRotation rotation         0 1 0 0
+  field SFString   robotTeam        "1"                  # 1 or 2
   field SFString   robotNumber      "0"                  # any natural number from 0 to 15
-  field SFString   name             "robot0"             # any string
+  field SFString   name             "robot_1_0"          # any string
   field SFString   controller       "robotController"    # any string
 ]
 {
+  %{
+    local team = fields.robotTeam.value
+    local num = fields.robotNumber.value
+  }%
   Robot {
     name IS name
     translation IS translation
     rotation IS rotation
     children [
       coloredCap {
+        robotTeam IS robotTeam
         robotNumber IS robotNumber
       }
       Transform {
@@ -82,7 +88,7 @@ PROTO robot[
               ]
             }
           ]
-          name "solid%{=num}%"
+          name "solid_%{=team}%_%{=num}%"
           boundingObject Transform {
             translation -0.047 -0.045 0
             rotation 0 0 1 1.5707903061004251
@@ -101,7 +107,7 @@ PROTO robot[
         translation 0 0.006 -0.039
       }
     ]
-    name "robot%{=num}%"
+    name "robot_%{=team}%_%{=num}%"
     boundingObject Group {
       children [
         Transform {

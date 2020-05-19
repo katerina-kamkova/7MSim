@@ -29,8 +29,6 @@ PROTO robot[
           }
           body {
           }
-          bottom {
-          }
         ]
       }
       HingeJoint {
@@ -126,14 +124,6 @@ PROTO robot[
           rotation 0 1 0 3.141592653589793
           children [
             body {
-            }
-          ]
-        }
-        Transform {
-          translation 0 0.0165 0
-          children [
-            Box {
-              size 0.069 0.001 0.09
             }
           ]
         }

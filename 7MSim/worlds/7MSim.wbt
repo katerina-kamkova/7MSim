@@ -1,9 +1,10 @@
 #VRML_SIM R2020a utf8
 WorldInfo {
+  basicTimeStep 64
 }
 Viewpoint {
-  orientation 0.9623283603131981 0.2588448961094973 0.08320725145667948 5.63841273036763
-  position -0.8214436937561254 3.5193845076904355 4.5043475316442905
+  orientation 0.9896200246274461 0.13444470134182498 0.0507624776530886 5.554215760158979
+  position -0.4094590007042447 3.3700933471445 3.462824067346963
 }
 TexturedBackground {
 }
@@ -15,7 +16,7 @@ soccerField {
   lineThickness 0.01
 }
 ball {
-  translation 0.01 0.03 0.34
+  translation 0 0.03 0.25
   radius 0.03
 }
 camera {
@@ -32,13 +33,13 @@ robot {
 }
 robot {
   translation -0.83 0 0.32
-  rotation 0 1 0 1.8326
+  rotation 0 1 0 2.35619
   robotTeam "2"
   name "robot_2_0"
 }
 robot {
-  translation -0.79 0 -0.23
-  rotation 0 1 0 1.0472
+  translation -0.833302 0 -0.255
+  rotation 0 -1 0 -0.7854053071795866
   robotTeam "2"
   robotNumber "1"
   name "robot_2_1"

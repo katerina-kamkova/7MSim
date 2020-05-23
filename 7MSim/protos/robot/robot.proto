@@ -21,12 +21,12 @@ PROTO robot[
         robotTeam IS robotTeam
         robotNumber IS robotNumber
       }
+      cap{
+      }
       Transform {
         translation 0 0.0675 0
         rotation 0 1 0 3.141592653589793
         children [
-          cap {
-          }
           body {
           }
         ]
@@ -109,15 +109,7 @@ PROTO robot[
     name "robot_%{=team}%_%{=num}%"
     boundingObject Group {
       children [
-        Transform {
-          translation 0 0.0825 0
-          children [
-            Cylinder {
-              height 0.023
-              radius 0.0675
-              subdivision 30
-            }
-          ]
+        cap{
         }
         Transform {
           translation 0 0.0675 0

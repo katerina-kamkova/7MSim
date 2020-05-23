@@ -1,6 +1,6 @@
-PROTO footballField[
-  field SFFloat    length               9.6                  # [0, inf)
-  field SFFloat    width                6.6                  # [0, inf)
+PROTO soccerField[
+  field SFFloat    length               9                    # [0, inf)
+  field SFFloat    width                6                    # [0, inf)
   field SFFloat    lineThickness        0.04                 # [0, inf)
   field SFFloat    wallThickness        0.1                  # [0, inf)
 

@@ -1,10 +1,10 @@
 PROTO floor [
   field SFString   name           "floor"                                           # any string
-  field SFFloat    length         9.6                                               # [0, inf)
-  field SFFloat    width          6.6                                               # [0, inf)
+  field SFFloat    length         9                                                 # [0, inf)
+  field SFFloat    width          6                                                 # [0, inf)
 
   field SFColor  baseColor        0.6 0.65 0.6                                      # any color
-  field SFNode   baseColorMap     ImageTexture {url["colors/fieldCover.jpeg"]}   # {ImageTexture, PROTO}
+  field SFNode   baseColorMap     ImageTexture {url["colors/fieldCover.jpeg"]}      # {ImageTexture, PROTO}
 ]
 {
   %{
@@ -14,8 +14,8 @@ PROTO floor [
     local floorLength = 10.4
     local floorWidth = 7.4 
 
-    local fieldLength = 9.6
-    local fieldWidth = 6.6         
+    local fieldLength = 9
+    local fieldWidth = 6         
   }%
   Solid {
     children [

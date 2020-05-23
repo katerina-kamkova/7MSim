@@ -2,8 +2,8 @@
 WorldInfo {
 }
 Viewpoint {
-  orientation 0.9854535793305195 0.11082708145918602 0.12883555797956758 4.5479166208033375
-  position 0.09800747816307248 3.1177659213073308 -0.6321188002892939
+  orientation 0.9188316123334361 0.35720312854503133 0.16779270882365543 5.337992518270216
+  position -1.086521893055505 2.2418172484839887 1.8643983805989066
 }
 TexturedBackground {
   skyColor [
@@ -12,9 +12,7 @@ TexturedBackground {
 }
 TexturedBackgroundLight {
 }
-footballField {
-  length 3
-  width 2
+soccerField {
   lineThickness 0.01
 }
 ball {
@@ -41,15 +39,15 @@ robot {
   name "robot0(3)"
 }
 Robot {
-  translation 0 2 0
+  translation 0 6 0
   rotation 1 0 0 -1.5707996938995747
   children [
     Camera {
-      fieldOfView 1.36
+      fieldOfView 1.44
       width 1024
       height 768
     }
   ]
-  controller "cameraController"
+  controller "easyCameraController"
   synchronization FALSE
 }

@@ -1,8 +1,8 @@
 PROTO lines [
   field SFString   name                 "lines"           # any string
 
-  field SFFloat    length               9.6               # [0, inf)
-  field SFFloat    width                6.6               # [0, inf)
+  field SFFloat    length               9                 # [0, inf)
+  field SFFloat    width                6                 # [0, inf)
   field SFFloat    thickness            0.04              # [0, inf)
 ]
 {
@@ -39,10 +39,10 @@ PROTO lines [
         geometry IndexedFaceSet {
           coord Coordinate {
             point [
-              %{=l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=t / 2}%
-              %{=l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=-t / 2}%
-              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=-t / 2}%
-              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=t / 2}%
+              %{=l / 2 + (t / 2)}% %{=lineHight}% %{=t / 2}%
+              %{=l / 2 + (t / 2)}% %{=lineHight}% %{=-t / 2}%
+              %{=-l / 2 - (t / 2)}% %{=lineHight}% %{=-t / 2}%
+              %{=-l / 2 - (t / 2)}% %{=lineHight}% %{=t / 2}%
             ]
           }
           coordIndex [
@@ -51,13 +51,13 @@ PROTO lines [
         }
       }
       Transform {
-        translation 0 0 %{=w * pfw / (2 * fw)}%
+        translation 0 0 %{=w / 2}%
         children [
           USE SmallXline
         ]
       }
       Transform {
-        translation 0 0 %{=-w * pfw / (2 * fw)}%
+        translation 0 0 %{=-w / 2}%
         children [
           USE SmallXline
         ]
@@ -67,10 +67,10 @@ PROTO lines [
         geometry IndexedFaceSet {
           coord Coordinate {
             point [
-              %{=t / 2}% %{=lineHight}% %{=w * pfw / (2 * fw) + (t / 2)}%
-              %{=t / 2}% %{=lineHight}% %{=-w * pfw / (2 * fw) - (t / 2)}%
-              %{=-t / 2}% %{=lineHight}% %{=-w * pfw / (2 * fw) - (t / 2)}%
-              %{=-t / 2}% %{=lineHight}% %{=w * pfw / (2 * fw) + (t / 2)}%
+              %{=t / 2}% %{=lineHight}% %{=w / 2 + (t / 2)}%
+              %{=t / 2}% %{=lineHight}% %{=-w / 2 - (t / 2)}%
+              %{=-t / 2}% %{=lineHight}% %{=-w / 2 - (t / 2)}%
+              %{=-t / 2}% %{=lineHight}% %{=w / 2 + (t / 2)}%
             ]
           }
           coordIndex [
@@ -79,13 +79,13 @@ PROTO lines [
         }
       }
       Transform {
-        translation %{=l * pfl / (2 * fl)}% 0 0
+        translation %{=l / 2}% 0 0
         children [
           USE SmallZline
         ]
       }
       Transform {
-        translation %{=-l * pfl / (2 * fl)}% 0 0
+        translation %{=-l / 2}% 0 0
         children [
           USE SmallZline
         ]
@@ -99,10 +99,10 @@ PROTO lines [
         geometry IndexedFaceSet {
           coord Coordinate {
             point [
-              %{=(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w + (t * 1.5)) / 2}%
-              %{=(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w - (t * 1.5)) / 2}%
-              %{=-(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w - (t * 1.5)) / 2}%
-              %{=-(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w + (t * 1.5)) / 2}%
+              %{=(l * fl / pfl + (t * 1.5)) / 2}% %{=lineHight}% %{=(w * fw / pfw + (t * 1.5)) / 2}%
+              %{=(l * fl / pfl + (t * 1.5)) / 2}% %{=lineHight}% %{=(w * fw / pfw - (t * 1.5)) / 2}%
+              %{=-(l * fl / pfl + (t * 1.5)) / 2}% %{=lineHight}% %{=(w * fw / pfw - (t * 1.5)) / 2}%
+              %{=-(l * fl / pfl + (t * 1.5)) / 2}% %{=lineHight}% %{=(w * fw / pfw + (t * 1.5)) / 2}%
             ]
           }
           coordIndex [
@@ -111,7 +111,7 @@ PROTO lines [
         }
       }
       Transform {
-        translation 0 0 %{=-w}%
+        translation 0 0 %{=-w * fw / pfw}%
         children [
           USE BigXline
         ]
@@ -121,10 +121,10 @@ PROTO lines [
         geometry IndexedFaceSet {
           coord Coordinate {
             point [
-              %{=(l + (t * 1.5)) / 2}% %{=lineHight}% %{=-(w + (t * 1.5)) / 2}%
-              %{=(l - (t * 1.5)) / 2}% %{=lineHight}% %{=-(w + (t * 1.5)) / 2}%
-              %{=(l - (t * 1.5)) / 2}% %{=lineHight}% %{=(w + (t * 1.5)) / 2}%
-              %{=(l + (t * 1.5)) / 2}% %{=lineHight}% %{=(w + (t * 1.5)) / 2}%
+              %{=(l * fl / pfl + (t * 1.5)) / 2}% %{=lineHight}% %{=-(w * fw / pfw + (t * 1.5)) / 2}%
+              %{=(l * fl / pfl - (t * 1.5)) / 2}% %{=lineHight}% %{=-(w * fw / pfw + (t * 1.5)) / 2}%
+              %{=(l * fl / pfl - (t * 1.5)) / 2}% %{=lineHight}% %{=(w * fw / pfw + (t * 1.5)) / 2}%
+              %{=(l * fl / pfl + (t * 1.5)) / 2}% %{=lineHight}% %{=(w * fw / pfw + (t * 1.5)) / 2}%
             ]
           }
           coordIndex [
@@ -133,7 +133,7 @@ PROTO lines [
         }
       }
       Transform {
-        translation %{=-l}% 0 0
+        translation %{=-l * fl / pfl}% 0 0
         children [
           USE BigZline
         ]
@@ -143,14 +143,14 @@ PROTO lines [
         geometry IndexedFaceSet {
           coord Coordinate {
             point [
-              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=w * gaw / (2 * fw) + (t / 2)}%
-              %{=-l * pfl / (2 * fl) + (t / 2) + (l * gad / fl)}% %{=lineHight}% %{=w * gaw / (2 * fw) + (t / 2)}%
-              %{=-l * pfl / (2 * fl) + (t / 2) + (l * gad / fl)}% %{=lineHight}% %{=-w * gaw / (2 * fw) - (t / 2)}%
-              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=-w * gaw / (2 * fw) - (t / 2)}%
-              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=-w * gaw / (2 * fw) + (t / 2)}%
-              %{=-l * pfl / (2 * fl) - (t / 2) + (l * gad / fl)}% %{=lineHight}% %{=-w * gaw / (2 * fw) + (t / 2)}%
-              %{=-l * pfl / (2 * fl) - (t / 2) + (l * gad / fl)}% %{=lineHight}% %{=w * gaw / (2 * fw) - (t / 2)}%  
-              %{=-l * pfl / (2 * fl) - (t / 2)}% %{=lineHight}% %{=w * gaw / (2 * fw) - (t / 2)}%
+              %{=-l / 2 - (t / 2)}% %{=lineHight}% %{=w * gaw / (2 * pfw) + (t / 2)}%
+              %{=-l / 2 + (t / 2) + (l * gad / pfl)}% %{=lineHight}% %{=w * gaw / (2 * pfw) + (t / 2)}%
+              %{=-l / 2 + (t / 2) + (l * gad / pfl)}% %{=lineHight}% %{=-w * gaw / (2 * pfw) - (t / 2)}%
+              %{=-l / 2 - (t / 2)}% %{=lineHight}% %{=-w * gaw / (2 * pfw) - (t / 2)}%
+              %{=-l / 2 - (t / 2)}% %{=lineHight}% %{=-w * gaw / (2 * pfw) + (t / 2)}%
+              %{=-l / 2 - (t / 2) + (l * gad / pfl)}% %{=lineHight}% %{=-w * gaw / (2 * pfw) + (t / 2)}%
+              %{=-l / 2 - (t / 2) + (l * gad / pfl)}% %{=lineHight}% %{=w * gaw / (2 * pfw) - (t / 2)}%  
+              %{=-l / 2 - (t / 2)}% %{=lineHight}% %{=w * gaw / (2 * pfw) - (t / 2)}%
             ]
           }
           coordIndex [
@@ -169,14 +169,14 @@ PROTO lines [
         geometry IndexedFaceSet {
           coord Coordinate {
             point [
-              %{=-l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=w * gw / (2 * fw) + (t / 2)}%
-              %{=-l * pfl / (2 * fl) - (t / 2) - (l * gd / fl)}% %{=lineHight}% %{=w * gw / (2 * fw) + (t / 2)}%
-              %{=-l * pfl / (2 * fl) - (t / 2) - (l * gd / fl)}% %{=lineHight}% %{=-w * gw / (2 * fw) - (t / 2)}%
-              %{=-l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=-w * gw / (2 * fw) - (t / 2)}%
-              %{=-l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=-w * gw / (2 * fw) + (t / 2)}%
-              %{=-l * pfl / (2 * fl) + (t / 2) - (l * gd / fl)}% %{=lineHight}% %{=-w * gw / (2 * fw) + (t / 2)}%
-              %{=-l * pfl / (2 * fl) + (t / 2) - (l * gd / fl)}% %{=lineHight}% %{=w * gw / (2 * fw) - (t / 2)}%
-              %{=-l * pfl / (2 * fl) + (t / 2)}% %{=lineHight}% %{=w * gw / (2 * fw) - (t / 2)}%
+              %{=-l / 2 + (t / 2)}% %{=lineHight}% %{=w * gw / (2 * pfw) + (t / 2)}%
+              %{=-l / 2 - (t / 2) - (l * gd / pfl)}% %{=lineHight}% %{=w * gw / (2 * pfw) + (t / 2)}%
+              %{=-l / 2 - (t / 2) - (l * gd / pfl)}% %{=lineHight}% %{=-w * gw / (2 * pfw) - (t / 2)}%
+              %{=-l / 2 + (t / 2)}% %{=lineHight}% %{=-w * gw / (2 * pfw) - (t / 2)}%
+              %{=-l / 2 + (t / 2)}% %{=lineHight}% %{=-w * gw / (2 * pfw) + (t / 2)}%
+              %{=-l / 2 + (t / 2) - (l * gd / pfl)}% %{=lineHight}% %{=-w * gw / (2 * pfw) + (t / 2)}%
+              %{=-l / 2 + (t / 2) - (l * gd / pfl)}% %{=lineHight}% %{=w * gw / (2 * pfw) - (t / 2)}%
+              %{=-l / 2 + (t / 2)}% %{=lineHight}% %{=w * gw / (2 * pfw) - (t / 2)}%
             ]
           }
           coordIndex [
@@ -197,7 +197,7 @@ PROTO lines [
             appearance USE SmallLineColour
             geometry Cylinder {
               height %{=lineHight}%
-              radius %{=math.sqrt(l * l + (w * w)) * scr / math.sqrt(fl * fl + (fw + fw)) + (t / 2)}%
+              radius %{=math.sqrt(l * l + (w * w)) * scr / math.sqrt(pfl * pfl + (pfw + pfw)) + (t / 2)}%
             }
           }
         ]
@@ -211,7 +211,7 @@ PROTO lines [
 		point [
                   %{
                     for i = 0, bcs do
-                    local r = math.sqrt(l * l + (w * w)) * bcr / math.sqrt(fl * fl + (fw * fw)) + (t / 2)
+                    local r = math.sqrt(l * l + (w * w)) * bcr / math.sqrt(pfl * pfl + (pfw * pfw)) + (t / 2)
                     local x = r * math.sin(i * 2 * math.pi / bcs)
                     local z = r * math.cos(i * 2 * math.pi / bcs)
                   }%
@@ -221,7 +221,7 @@ PROTO lines [
 
                   %{
                     for i = 0, bcs do
-                    local r = math.sqrt(l * l + (w * w)) * bcr / math.sqrt(fl * fl + (fw * fw)) - (t / 2)
+                    local r = math.sqrt(l * l + (w * w)) * bcr / math.sqrt(pfl * pfl + (pfw * pfw)) - (t / 2)
                     local x = r * math.sin(i * (-2) * math.pi / bcs)
                     local z = r * math.cos(i * (-2) * math.pi / bcs)
                   }%

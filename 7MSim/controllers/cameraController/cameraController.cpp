@@ -15,6 +15,7 @@ int main(int argc, char **argv) {
   Camera *camera = robot->getCamera("camera");
   camera->enable(1);    
   
+  // start server
   int sock = socket(AF_INET, SOCK_STREAM, 0);
   if (sock == -1) {
     std::cout << "Failed to create socket. Errno: " << errno << std::endl;

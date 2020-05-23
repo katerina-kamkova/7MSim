@@ -21,6 +21,7 @@ int main(int argc, char **argv) {
   leftMotor->setVelocity(0);
   rightMotor->setVelocity(0);
   
+  //start client
   int sock = socket(AF_INET, SOCK_STREAM, 0);
   sockaddr_in server_address{};
   if (sock == -1)

@@ -1,6 +1,6 @@
 PROTO camera[
-  field SFFloat    length             9.6                      # [0, inf)
-  field SFFloat    width              6.6                      # [0, inf)
+  field SFFloat    length             9                        # [0, inf)
+  field SFFloat    width              6                        # [0, inf)
 
   field SFString   controller         "easyCameraController"   # any string
   field SFBool     synchronization    TRUE                     # {TRUE, FALSE}
@@ -10,10 +10,10 @@ PROTO camera[
     local l = fields.length.value           -- football field length
     local w = fields.width.value            -- football field width
 
-    local classicFL = 9.6                   -- classic field length
-    local classicFW = 6.6                   -- classic field width
+    local classicFL = 9                     -- classic field length
+    local classicFW = 6                     -- classic field width
 
-    local classicCH = 6.4                   -- classic camera height
+    local classicCH = 6                     -- classic camera height
   }%
   Robot {
     %{  
@@ -29,7 +29,7 @@ PROTO camera[
     rotation 1 0 0 -1.5707996938995747
     children [
       Camera {
-        fieldOfView 1.36
+        fieldOfView 1.44
         width 1024
         height 768
       }

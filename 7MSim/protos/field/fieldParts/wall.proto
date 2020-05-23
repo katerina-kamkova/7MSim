@@ -1,9 +1,9 @@
 PROTO wall [
   field SFString   name         "wall"            # any string
 
-  field SFFloat    length       9.6               # [0, inf)
-  field SFFloat    width        6.6               # [0, inf)
-  field SFFloat    height        0.5               # [0, inf)
+  field SFFloat    length       9                 # [0, inf)
+  field SFFloat    width        6                 # [0, inf)
+  field SFFloat    height       0.5               # [0, inf)
   field SFFloat    thickness    0.1               # [0, inf)
 ]
 {
@@ -16,8 +16,8 @@ PROTO wall [
     local floorLength = 10.4
     local floorWidth = 7.4 
 
-    local fieldLength = 9.6
-    local fieldWidth = 6.6    
+    local fieldLength = 9
+    local fieldWidth = 6    
   }%
   Solid {
     name IS name

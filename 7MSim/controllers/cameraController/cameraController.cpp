@@ -46,16 +46,16 @@ int main(int argc, char **argv) {
     exit(EXIT_FAILURE);
   }
   
+  unsigned int width = camera->getWidth();
+  unsigned int height = camera->getHeight();
+  unsigned long long int pictureSize = width * height * 4;
+  
+  send(connection, &width, sizeof(unsigned int), 0);
+  send(connection, &height, sizeof(unsigned int), 0);
+  
   // Main loop:
   // - perform simulation steps until Webots is stopping the controller
   while (robot->step(timeStep) != -1) {
-    unsigned int width = camera->getWidth();
-    unsigned int height = camera->getHeight();
-    unsigned long long int pictureSize = width * height * 4;
-  
-    send(connection, &width, sizeof(unsigned int), 0);
-    send(connection, &height, sizeof(unsigned int), 0);
-      
     const unsigned char* picture = camera->getImage();
     send(connection, picture, pictureSize, 0); 
   };

@@ -38,6 +38,7 @@ PROTO robot[
         device [
           RotationalMotor {
             name "leftMotor"
+            maxVelocity 100
           }
         ]
         endPoint Solid {
@@ -73,6 +74,7 @@ PROTO robot[
         device [
           RotationalMotor {
             name "rightMotor"
+            maxVelocity 100 
           }
         ]
         endPoint Solid {

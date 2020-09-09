@@ -17,8 +17,8 @@ int main(int argc, char **argv) {
   leftMotor->setPosition(INFINITY);
   rightMotor->setPosition(INFINITY);
  
-  leftMotor->setVelocity(26);
-  rightMotor->setVelocity(30);
+  leftMotor->setVelocity(-26);
+  rightMotor->setVelocity(-30);
   
   auto client = new Client(true, 7777);
   client->sendNumber(100);

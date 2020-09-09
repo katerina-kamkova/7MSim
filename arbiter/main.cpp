@@ -34,9 +34,9 @@ int main() {
     while (true)                                       // игровой процесс
     {
         server->getData(supervisorConnection, game->robots);   // получение информации
-        game->Run();                                              // игра принимает решение
-        Server::sendData(game->robots);                        // отсылаем новую команду
-        std::cout << std::endl << (counter++) << "\n";
+        //game->Run();                                              // игра принимает решение
+        //Server::sendData(game->robots);                        // отсылаем новую команду
+        //std::cout << std::endl << (counter++) << "\n";
     }
 
     return 0;

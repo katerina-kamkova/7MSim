@@ -44,12 +44,8 @@ void Client::sendData(int number, Field* transField, Field* rotField){
   const double *rotation = rotField->getSFRotation();
 
   send(sock, &number, sizeof(int), 0);
-  std::cout << number << std::endl;
-  send(sock, translation[0], sizeof(double), 0);
-  std::cout << translation[0] << std::endl;
-  send(sock, translation[1], sizeof(double), 0);
-  std::cout << translation[1] << std::endl;
-  send(sock, rotation[3], sizeof(double), 0);
-  std::cout << rotation[3] << std::endl;  
+  send(sock, &translation[0], sizeof(double), 0);
+  send(sock, &translation[2], sizeof(double), 0);
+  send(sock, &rotation[3], sizeof(double), 0);
 }
 

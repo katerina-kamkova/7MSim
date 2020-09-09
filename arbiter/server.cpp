@@ -50,18 +50,18 @@ RobotStruct Server::connectClient() const {
 }
 
 void Server::getData(int connection, std::map<int, RobotStruct>& robots) {
-    for (int i = 0; i < robots.size(); i++) {
+    //for (int i = 0; i < robots.size(); i++) {
         int robotNumber = 0;
         recv(connection, &robotNumber, sizeof(int), 0);
 
         Point position{};
-        recv(connection, &position.x, sizeof(int), 0);
-        recv(connection, &position.y, sizeof(int), 0);
+        recv(connection, &position.x, sizeof(double), 0);
+        recv(connection, &position.y, sizeof(double), 0);
         robots[robotNumber].location = position;
 
         recv(connection, &robots[robotNumber].rotation, sizeof(double), 0);
         // пока без скорости, сложно в webots
-    }
+    //}
 }
 
 void Server::sendData(std::map<int, RobotStruct>& robots) {

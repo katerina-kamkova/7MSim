@@ -19,12 +19,7 @@ int main(int argc, char **argv) {
   Field *rotField = robot_1_0->getField("rotation");
 
   while (supervisor->step(timeStep) != -1) {
-    client->sendData(101, transField, rotField);
-    //const double *translation = transField->getSFVec3f();
-    //const double *rotation = rotField->getSFRotation();
-  //std::cout << translation[0] << std::endl;
-  //std::cout << rotation[3] << std::endl;
-  //std::cout << translation[2] << std::endl;  
+    client->sendData(100, transField, rotField);
   };
   
   delete client;

@@ -1,0 +1,1 @@
+/usr/bin/c++  -g   CMakeFiles/arbiter.dir/main.cpp.o CMakeFiles/arbiter.dir/game.cpp.o CMakeFiles/arbiter.dir/server.cpp.o CMakeFiles/arbiter.dir/robot.cpp.o  -o arbiter 

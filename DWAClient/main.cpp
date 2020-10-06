@@ -1,26 +1,24 @@
-#include <iostream>
 #include "ObstacleAvoidance.h"
+#include "world_data.pb.h"
 #include "SafeQueue.h"
 
 using namespace std;
 
-SafeQueue<WorldData> safeWorldDataQueue;
+SafeQueue<protocol::WorldData> safeWorldDataQueue;
 
-void sendData(WheelsVelocity velocity);
-WorldData waitWorldData();
+void sendData(const protocol::WheelsVelocity& velocity);
 
-
-void sendData(WheelsVelocity velocity) {
+void sendData(const protocol::WheelsVelocity& velocity) {
 
 }
 
 int main() {
 
-    while (true) {
-        WorldData worldData = safeWorldDataQueue.dequeue();
+    protocol::WorldData worldData;
+    worldData.CopyFrom(safeWorldDataQueue.dequeue());
 
-        WheelsVelocity velocityData = ObstacleAvoidance::dwa(worldData);
+    protocol::WheelsVelocity velocityData;
+    velocityData.CopyFrom(ObstacleAvoidance::dwa(worldData));
 
-        sendData(velocityData);
-    }
+    sendData(velocityData);
 }

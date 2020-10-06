@@ -6,15 +6,15 @@
 #define DWACLIENT_OBSTACLEAVOIDANCE_H
 
 #include <vector>
-#include "WorldStructures.h"
+#include "world_data.pb.h"
 
 
 class ObstacleAvoidance {
 public:
-    static WheelsVelocity dwa(const WorldData& worldData);
+    static protocol::WheelsVelocity dwa(const protocol::WorldData& worldData);
 private:
-    static RobotPosition CalculateNewPosition(WheelsVelocity velocity, RobotPosition position);
-    static double CalculateClosestObstacleDistance(Coord robotCoord, const std::vector<Coord>& obstacleCoords);
+    static protocol::Position CalculateNewPosition(const protocol::WheelsVelocity& velocity, const protocol::Position& position);
+    static double CalculateClosestObstacleDistance(const protocol::Coord& robotCoord, const google::protobuf::RepeatedPtrField<protocol::Coord>& obstacleCoords);
 };
 
 const int OBSTACLE_RADIUS = 1;

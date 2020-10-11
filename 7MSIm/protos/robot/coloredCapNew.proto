@@ -1,0 +1,32 @@
+PROTO coloredCapNew[
+  field SFString   robotTeam        "1"                  # 1 or 2
+  field SFString   robotNumber      "0"                  # any natural number from 0 to 15
+]
+{
+  %{
+    local team = fields.robotTeam.value
+    local num = fields.robotNumber.value
+  }%
+  Transform {
+    translation 0 0.0275 0
+    rotation 0 1 0 3.141592653589793
+    children [
+      Shape {
+        appearance PBRAppearance {
+          baseColorMap ImageTexture {
+            url [
+              "caps/Team%{=team}%/jpgCaps/cap%{=num}%.jpg"
+            ]
+          }
+          roughness 1
+          metalness 0
+        }
+        geometry Cylinder {
+          height 0.0001
+          radius 0.0675
+          subdivision 30
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,130 @@
+PROTO robotNew[
+  field SFVec3f    translation      0 0.0675 0                
+  field SFRotation rotation         0 1 0 0
+  field SFString   robotTeam        "1"                      # 1 or 2
+  field SFString   robotNumber      "0"                      # any natural number from 0 to 15
+  field SFString   name             "robot_1_0"              # any string
+  field SFString   controller       "easyRobotController"    # any string
+  field SFBool     synchronization  TRUE                     # {TRUE, FALSE}
+]
+{
+  %{
+    local team = fields.robotTeam.value
+    local num = fields.robotNumber.value
+  }%
+  Robot {
+    name IS name
+    translation IS translation
+    rotation IS rotation
+    children [
+      coloredCapNew {
+        robotTeam IS robotTeam
+        robotNumber IS robotNumber
+      }
+      Transform {
+        rotation 0 1 0 3.141592653589793
+        children [
+          capNew {
+          }
+          body {
+          }
+        ]
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          anchor -0.047 -0.0455 0
+        }
+        device [
+          RotationalMotor {
+            name "rightMotor"
+            maxVelocity 100
+          }
+        ]
+        endPoint Solid {
+          translation -0.047 -0.0455 0
+          rotation 0 0 1 1.5707996938995745
+          children [
+            DEF wheel Shape {
+              appearance PBRAppearance {
+                roughness 1
+                metalness 0
+              }
+              geometry Cylinder {
+                height 0.018
+                radius 0.022
+                subdivision 50
+              }
+            }
+          ]
+          name "right_solid_%{=team}%_%{=num}%"
+          boundingObject USE wheel
+          physics Physics {
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          anchor 0.047 -0.0455 0
+        }
+        device [
+          RotationalMotor {
+            name "leftMotor"
+            maxVelocity 100
+          }
+        ]
+        endPoint Solid {
+          translation 0.047 -0.0455 0
+          rotation 0 0 1 1.5707996938995745
+          children [
+            USE wheel
+          ]
+          name "left_solid_%{=team}%_%{=num}%"
+          boundingObject USE wheel
+          physics Physics {
+          }
+        }
+      }
+      smallWheel {
+        translation 0 -0.0615 -0.039
+      }
+      smallWheel {
+        translation 0 -0.0615 0.039
+      }
+    ]
+    name "robot_%{=team}%_%{=num}%"
+    boundingObject Group {
+      children [
+        capNew {
+        }
+        body {
+        }
+        Transform {
+          translation 0 -0.0615 -0.039
+          children [
+            DEF smallBall Shape {
+              geometry Sphere {
+                radius 0.006
+                subdivision 5
+              }
+            }
+          ]
+        }
+        Transform {
+          translation 0 -0.0615 0.039
+          children [
+            USE smallBall
+          ]
+        }
+      ]
+    }
+    physics Physics {
+      density -1
+      mass 0.6
+      centerOfMass [
+        0 -0.04 0
+      ]
+    }
+    controller IS controller
+    synchronization IS synchronization
+  }
+}

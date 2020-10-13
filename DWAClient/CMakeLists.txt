@@ -1,12 +1,14 @@
 cmake_minimum_required(VERSION 3.17)
-project(DWAClient)
+set(PROJECT_NAME DWAClient)
+project(${PROJECT_NAME})
 
 find_package(Protobuf REQUIRED)
 
-set(CMAKE_CXX_STANDARD 14)
-set(CMAKE_CXX_COMPILER g++)
+set(PROTO_FILES ../protobuf/world_data.proto)
 
-add_executable(DWAClient main.cpp ObstacleAvoidance.h ObstacleAvoidance.cpp world_data.pb.h world_data.pb.cc)
+PROTOBUF_GENERATE_CPP(PROTO_SRC PROTO_HDR ${PROTO_FILES})
+
+add_executable(DWAClient main.cpp ObstacleAvoidance.h ObstacleAvoidance.cpp ${PROTO_SRC} ${PROTO_HDR} ${PROTO_FILES} TCPServer.h  TCPServer.cpp )
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${CMAKE_CURRENT_BINARY_DIR}

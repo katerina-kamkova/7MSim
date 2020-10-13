@@ -5,10 +5,8 @@
 using namespace std;
 
 const int port = 4343;
-Client supervisorClient, robotClient;
 
 void sendWorldDataToClient(const Client& client, const protocol::WheelsVelocity& velocity);
-void DistributeNewClient(Client newClient);
 protocol::WorldData ReceiveWorldDataFromClient(const Client& client);
 
 void sendWorldDataToClient(const Client& client, const protocol::WheelsVelocity& velocity) {
@@ -17,19 +15,6 @@ void sendWorldDataToClient(const Client& client, const protocol::WheelsVelocity&
     velocity.SerializeToArray(velocityArray, size);
 
     TCPServer::SendToClient(client, velocityArray, size);
-}
-
-void DistributeNewClient(Client newClient)
-{
-    if (newClient.clientType == supervisor)
-    {
-        supervisorClient = newClient;
-    }
-    else
-    {
-        robotClient = newClient;
-    }
-
 }
 
 protocol::WorldData ReceiveWorldDataFromClient(const Client& client)
@@ -52,8 +37,7 @@ int main() {
     TCPServer tcpServer(port);
     tcpServer.StartListening();
 
-    DistributeNewClient(tcpServer.AcceptNewClient());
-    DistributeNewClient(tcpServer.AcceptNewClient());
+    Client supervisorClient = tcpServer.AcceptNewClient();
 
     while (true) {
         protocol::WorldData worldData = ReceiveWorldDataFromClient(supervisorClient);
@@ -61,6 +45,6 @@ int main() {
         protocol::WheelsVelocity velocityData;
         velocityData.CopyFrom(ObstacleAvoidance::dwa(worldData));
 
-        sendWorldDataToClient(robotClient, velocityData);
+        sendWorldDataToClient(supervisorClient, velocityData);
     }
 }

@@ -34,12 +34,8 @@ Client TCPServer::AcceptNewClient() {
     int serverAddressLen = sizeof(serverAddr);
     ExitIfTrue((clientSocket = accept(serverSocket, (struct sockaddr *)&serverAddr, (socklen_t*)&serverAddressLen)) < 0, "Accept failed");
 
-    char buffer[512] = {0};
-    read(clientSocket, buffer, 1024);
-    int number = std::stoi(buffer);
-
     return Client{
-            .clientType = number == 1 ? supervisor : robot,
+            .clientType = supervisor,
             .clientSocket = clientSocket
     };
 }

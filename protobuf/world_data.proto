@@ -13,13 +13,14 @@ message Position {
 }
 
 message WheelsVelocity {
-    double leftWheelVelocity = 1;
-    double rightWheelVelocity = 2;
+    int leftWheelVelocity = 1;
+    int rightWheelVelocity = 2;
 }
 
 message RobotData {
     Position position = 1;
     WheelsVelocity wheelsVelocity = 2;
+    int number = 3;
 }
 
 message WorldData {

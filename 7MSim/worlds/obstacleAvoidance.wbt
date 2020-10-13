@@ -1,0 +1,66 @@
+#VRML_SIM R2020b utf8
+WorldInfo {
+  coordinateSystem "NUE"
+}
+Viewpoint {
+  orientation -0.9998336664707731 -0.013282510848754288 -0.012498571804948774 1.5101660408711788
+  position -0.623094354692854 6.367266695320647 0.6142214419538404
+}
+TexturedBackground {
+}
+TexturedBackgroundLight {
+}
+soccerField {
+  length 6
+  width 4
+  lineThickness 0.02
+}
+Robot {
+  supervisor TRUE
+}
+DEF actor robotNew {
+  translation -2.3 0.0675 0
+  rotation 0 1 0 1.5707996938995747
+}
+DEF obst1 robotNew {
+  translation -2 0.0675 0
+  robotTeam "2"
+  robotNumber "1"
+  name "robot_2_1"
+}
+DEF obst2 robotNew {
+  translation -0.81 0.0675 0.1
+  robotTeam "2"
+  robotNumber "2"
+  name "robot_2_2"
+}
+DEF obst3 robotNew {
+  translation -0.16 0.0675 0.2
+  robotTeam "2"
+  robotNumber "3"
+  name "robot_2_3"
+}
+DEF obst4 robotNew {
+  translation 0.44 0.0675 0.3
+  robotTeam "2"
+  robotNumber "4"
+  name "robot_2_4"
+}
+DEF obst5 robotNew {
+  translation 0.94 0.0675 0.4
+  robotTeam "2"
+  robotNumber "5"
+  name "robot_2_5"
+}
+DEF obst6 robotNew {
+  translation 1.43 0.0675 0.5
+  robotTeam "2"
+  robotNumber "6"
+  name "robot_2_6"
+}
+DEF obst7 robotNew {
+  translation 1.9 0.0675 0.6
+  robotTeam "2"
+  robotNumber "7"
+  name "robot_2_7"
+}

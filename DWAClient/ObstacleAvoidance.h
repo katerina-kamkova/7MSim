@@ -15,6 +15,7 @@ public:
 private:
     static protocol::Position CalculateNewPosition(const protocol::WheelsVelocity& velocity, const protocol::Position& position);
     static double CalculateClosestObstacleDistance(const protocol::Coord& robotCoord, const google::protobuf::RepeatedPtrField<protocol::Coord>& obstacleCoords);
+    static double CalculateDistanceBetween(const protocol::Coord& coord1, const protocol::Coord& coord2);
 };
 
 const int OBSTACLE_RADIUS = 1;

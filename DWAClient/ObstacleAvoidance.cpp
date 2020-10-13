@@ -11,21 +11,20 @@ protocol::WheelsVelocity ObstacleAvoidance::dwa(const protocol::WorldData& world
     auto bestBenefit = -100000;
 
     protocol::WheelsVelocity bestWheelsVelocity;
-    bestWheelsVelocity.set_leftwheelvelocity(worldData.robotdata().wheelsvelocity().leftwheelvelocity());
+    bestWheelsVelocity.set_leftwheelvelocity(worldData.robotdata().wheelsvelocity().leftwheelvelocity()) ;
     bestWheelsVelocity.set_rightwheelvelocity(worldData.robotdata().wheelsvelocity().rightwheelvelocity());
 
     std::vector<double> lMutls = MULTS, rMults = MULTS;
 
-    double currDistanceToBall = sqrt(pow(worldData.robotdata().position().coord().x() - worldData.ballcoord().x(), 2)
-                                     + pow(worldData.robotdata().position().coord().y() - worldData.ballcoord().y(), 2));
+    double currDistanceToBall = CalculateDistanceBetween(worldData.robotdata().position().coord(), worldData.ballcoord());
 
     for (auto lMult : lMutls)
     {
         for (auto rMult : rMults)
         {
             protocol::WheelsVelocity possibleWheelsVelocity;
-            possibleWheelsVelocity.set_leftwheelvelocity(worldData.robotdata().position().coord().x() - lMult * DELTA);
-            possibleWheelsVelocity.set_rightwheelvelocity(worldData.robotdata().position().coord().y() - rMult * DELTA);
+            possibleWheelsVelocity.set_leftwheelvelocity(worldData.robotdata().wheelsvelocity().leftwheelvelocity() - lMult * DELTA);
+            possibleWheelsVelocity.set_rightwheelvelocity(worldData.robotdata().wheelsvelocity().rightwheelvelocity() - rMult * DELTA);
 
             if (possibleWheelsVelocity.leftwheelvelocity() > ROBOT_MAX_VELOCITY or possibleWheelsVelocity.leftwheelvelocity() < -ROBOT_MAX_VELOCITY or
                 possibleWheelsVelocity.rightwheelvelocity() > ROBOT_MAX_VELOCITY or possibleWheelsVelocity.rightwheelvelocity() < -ROBOT_MAX_VELOCITY) continue;
@@ -33,8 +32,7 @@ protocol::WheelsVelocity ObstacleAvoidance::dwa(const protocol::WorldData& world
             protocol::Position predictRobotPosition = CalculateNewPosition(possibleWheelsVelocity,
                                                                       worldData.robotdata().position());
 
-            double predictDistanceToBall = sqrt(pow(predictRobotPosition.coord().x() - worldData.ballcoord().x(), 2)
-                                            + pow(predictRobotPosition.coord().y() - worldData.ballcoord().y(), 2));
+            double predictDistanceToBall = CalculateDistanceBetween(predictRobotPosition.coord(), worldData.ballcoord());
             double robotBallDistanceDifference = currDistanceToBall - predictDistanceToBall;
             double distanceBenefit = FORWARD_WEIGHT * robotBallDistanceDifference;
 
@@ -104,7 +102,7 @@ double ObstacleAvoidance::CalculateClosestObstacleDistance(const protocol::Coord
 
     for (const auto& obstacleCoord : obstacleCoords)
     {
-        double curDistance = sqrt(pow(robotCoord.x() - obstacleCoord.x(), 2) + pow(robotCoord.y() - obstacleCoord.y(), 2));
+        double curDistance = CalculateDistanceBetween(robotCoord, obstacleCoord);
 
         curDistance -= OBSTACLE_RADIUS + ROBOT_RADIUS;
 
@@ -115,4 +113,8 @@ double ObstacleAvoidance::CalculateClosestObstacleDistance(const protocol::Coord
     }
 
     return closestDistance;
+}
+
+double ObstacleAvoidance::CalculateDistanceBetween(const protocol::Coord& coord1, const protocol::Coord& coord2) {
+    return sqrt(pow(coord1.x() - coord2.x(), 2)+ pow(coord1.y() - coord2.y(), 2));
 }

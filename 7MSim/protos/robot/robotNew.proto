@@ -6,6 +6,7 @@ PROTO robotNew[
   field SFString   name             "robot_1_0"              # any string
   field SFString   controller       "easyRobotController"    # any string
   field SFBool     synchronization  TRUE                     # {TRUE, FALSE}
+  field SFBool     supervisor       FALSE                    # {TRUE, FALSE}
 ]
 {
   %{
@@ -126,5 +127,6 @@ PROTO robotNew[
     }
     controller IS controller
     synchronization IS synchronization
+    supervisor IS supervisor
   }
 }

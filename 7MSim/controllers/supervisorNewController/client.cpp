@@ -1,4 +1,5 @@
 #include <sys/socket.h>
+#include <unistd.h>
 #include <netinet/in.h>
 #include <iostream>
 #include <arpa/inet.h>
@@ -30,10 +31,28 @@ Client::Client(bool tcp, int port){
   }
 }
 
-void Client::sendWorldData(protocol::WorldData worldData) const {
-  //send(sock, &worldData, sizeof(protocol::WorldData), 0);
+void Client::sendWorldData(protocol::WorldData& worldData) const {
+  std::cout << "HI";
+  int size = worldData.ByteSize();
+  char* worldDataArray = new char[size];
+  worldData.SerializeToArray(worldDataArray, size);
+
+  send(sock, worldDataArray, size, 0);
 }
 
-void Client::getNewVelocity(protocol::WheelsVelocity *newVelocity) const {
-  recv(sock, newVelocity, sizeof(protocol::WheelsVelocity), 0);
+protocol::WheelsVelocity Client::getNewVelocity() const {
+  //recv(sock, newVelocity, sizeof(protocol::WheelsVelocity), 0);
+  
+  char velocityArray[1024] = {0};
+  int size = read(sock, velocityArray, 1024);
+
+  protocol::WheelsVelocity newVelocity;
+
+  if (!newVelocity.ParseFromArray(velocityArray, size))
+  {
+      perror("Failed to parse worldData from array");
+      exit(EXIT_FAILURE);
+  }
+  
+  return newVelocity;
 }

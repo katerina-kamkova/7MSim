@@ -4,7 +4,7 @@ WorldInfo {
 }
 Viewpoint {
   orientation -0.9998336664707731 -0.013282510848754288 -0.012498571804948774 1.5101660408711788
-  position -0.623094354692854 6.367266695320647 0.6142214419538404
+  position 0.1099089181498103 9.118207266239938 0.7066746522693261
 }
 TexturedBackground {
 }
@@ -21,9 +21,11 @@ Robot {
 DEF actor robotNew {
   translation -2.3 0.0675 0
   rotation 0 1 0 1.5707996938995747
+  controller "supervisorNewController"
+  supervisor TRUE
 }
 DEF obst1 robotNew {
-  translation -2 0.0675 0
+  translation -1.34 0.0675 0
   robotTeam "2"
   robotNumber "1"
   name "robot_2_1"
@@ -63,4 +65,17 @@ DEF obst7 robotNew {
   robotTeam "2"
   robotNumber "7"
   name "robot_2_7"
+}
+DEF ball Solid {
+  translation 2.66 0.03 -0.71
+  children [
+    Shape {
+      appearance PBRAppearance {
+      }
+      geometry Sphere {
+        radius 0.03
+        subdivision 5
+      }
+    }
+  ]
 }

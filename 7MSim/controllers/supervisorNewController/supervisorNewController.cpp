@@ -25,9 +25,7 @@ int main(int argc, char **argv) {
   std::cout << "HI2" << std::endl;
   Node *actor = supervisor->getFromDef("actor");                // поля робота
   Field *actorTrans = actor->getField("translation");
-  Field *actorRot = actor->getField("rotation");;
-    
-  int n = 7;                                                    // поля препятствий
+  Field *actorRot = actor->getField("rotation");                 
   
   Field *trans1 = supervisor->getFromDef("obst1")->getField("translation");
   Field *trans2 = supervisor->getFromDef("obst2")->getField("translation");
@@ -50,16 +48,16 @@ int main(int argc, char **argv) {
     protocol::Coord *actorCoord = new protocol::Coord();
     const double *translation = actorTrans->getSFVec3f();
     actorCoord->set_x(translation[0]);
-    actorCoord->set_y(translation[2]);
+    actorCoord->set_y(translation[2] * (-1));
     
     protocol::Position *actorPos = new protocol::Position();
     actorPos->set_allocated_coord(actorCoord);
     const double *rot = actorRot->getSFRotation();
-    actorPos->set_theta(rot[3] - 1.57);
+    actorPos->set_theta(rot[3] - (M_PI / 2));
     
     protocol::WheelsVelocity *actorVelocity = new protocol::WheelsVelocity();
-    actorVelocity->set_leftwheelvelocity(leftMotor->getVelocity() / 100.0);
-    actorVelocity->set_leftwheelvelocity(rightMotor->getVelocity() / 100.0);
+    actorVelocity->set_leftwheelvelocity(leftMotor->getVelocity() / 50.0);
+    actorVelocity->set_leftwheelvelocity(rightMotor->getVelocity() / 50.0);
     
     protocol::RobotData *actorData = new protocol::RobotData();
     actorData->set_allocated_position(actorPos);
@@ -76,42 +74,42 @@ int main(int argc, char **argv) {
     protocol::Coord *obstCoord1 = worldData->add_obstaclecoords();
     const double *obstTranslation1 = trans1->getSFVec3f();
     obstCoord1->set_x(obstTranslation1[0]);
-    obstCoord1->set_y(obstTranslation1[2]);
+    obstCoord1->set_y(obstTranslation1[2] * (-1));
     
     protocol::Coord *obstCoord2 = worldData->add_obstaclecoords();
     const double *obstTranslation2 = trans2->getSFVec3f();
     obstCoord2->set_x(obstTranslation2[0]);
-    obstCoord2->set_y(obstTranslation2[2]);
+    obstCoord2->set_y(obstTranslation2[2] * (-1));
       
     protocol::Coord *obstCoord3 = worldData->add_obstaclecoords();
     const double *obstTranslation3 = trans3->getSFVec3f();
     obstCoord3->set_x(obstTranslation3[0]);
-    obstCoord3->set_y(obstTranslation3[2]);
+    obstCoord3->set_y(obstTranslation3[2] * (-1));
     
     protocol::Coord *obstCoord4 = worldData->add_obstaclecoords();
     const double *obstTranslation4 = trans4->getSFVec3f();
     obstCoord4->set_x(obstTranslation4[0]);
-    obstCoord4->set_y(obstTranslation4[2]);
+    obstCoord4->set_y(obstTranslation4[2] * (-1));
     
     protocol::Coord *obstCoord5 = worldData->add_obstaclecoords();
     const double *obstTranslation5 = trans5->getSFVec3f();
     obstCoord5->set_x(obstTranslation5[0]);
-    obstCoord5->set_y(obstTranslation5[2]);
+    obstCoord5->set_y(obstTranslation5[2] * (-1));
     
     protocol::Coord *obstCoord6 = worldData->add_obstaclecoords();
     const double *obstTranslation6 = trans6->getSFVec3f();
     obstCoord6->set_x(obstTranslation6[0]);
-    obstCoord6->set_y(obstTranslation6[2]);
+    obstCoord6->set_y(obstTranslation6[2] * (-1));
     
     protocol::Coord *obstCoord7 = worldData->add_obstaclecoords();
     const double *obstTranslation7 = trans7->getSFVec3f();
     obstCoord7->set_x(obstTranslation7[0]);
-    obstCoord7->set_y(obstTranslation7[2]);
+    obstCoord7->set_y(obstTranslation7[2] * (-1));
     
     protocol::Coord *ballCoord = new protocol::Coord();
     const double *ballTranslation = ballTrans->getSFVec3f();
     ballCoord->set_x(ballTranslation[0]);
-    ballCoord->set_y(ballTranslation[2]);
+    ballCoord->set_y(ballTranslation[2] * (-1));
     worldData->set_allocated_ballcoord(ballCoord);
       
         
@@ -126,11 +124,15 @@ int main(int argc, char **argv) {
     std::cout<<newVelocity.leftwheelvelocity()<<std::endl;
     std::cout<<newVelocity.rightwheelvelocity()<<std::endl;
     
-    leftMotor->setVelocity(newVelocity.leftwheelvelocity());
-    rightMotor->setVelocity(newVelocity.rightwheelvelocity());
+    std::cout<<leftMotor->getVelocity()<<std::endl;
+    std::cout<<rightMotor->getVelocity()<<std::endl;
     
-    leftMotor->setVelocity(newVelocity.leftwheelvelocity() * (-1));
-    rightMotor->setVelocity(newVelocity.rightwheelvelocity() * (-1));
+    leftMotor->setVelocity(newVelocity.leftwheelvelocity() * 50.0);
+    rightMotor->setVelocity(newVelocity.rightwheelvelocity() * 50.0);
+    
+    std::cout<<leftMotor->getVelocity()<<std::endl;
+    std::cout<<rightMotor->getVelocity()<<std::endl;
+    
     std::cout << "HI6" << std::endl;
   };
 

@@ -86,8 +86,8 @@ protocol::Position ObstacleAvoidance::CalculateNewPosition(const protocol::Wheel
 
         double deltaTheta = (velocity.rightwheelvelocity() - velocity.leftwheelvelocity()) * TAU / ROBOT_WIDTH;
 
-        returnCoord->set_x(position.coord().x() + R * (sin(deltaTheta + TAU) - sin(TAU)));
-        returnCoord->set_y(position.coord().y() - R * (cos(deltaTheta + TAU) - cos(TAU)));
+        returnCoord->set_x(position.coord().x() + R * (sin(deltaTheta + position.theta()) - sin(position.theta())));
+        returnCoord->set_y(position.coord().y() - R * (cos(deltaTheta + position.theta()) - cos(position.theta())));
 
 
         returnPosition.set_theta(position.theta() + deltaTheta);

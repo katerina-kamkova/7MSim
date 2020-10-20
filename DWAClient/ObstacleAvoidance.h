@@ -28,7 +28,7 @@ const double ROBOT_MAX_ACCELERATION = 1.;
 const int FORWARD_WEIGHT = 200;
 const int OBSTACLE_WEIGHT = 6666;
 const double DT = 0.1;
-const double TAU = DT * 7;
+const double TAU = DT * 10;
 const double DELTA = ROBOT_MAX_ACCELERATION * DT;
 const std::vector<double> MULTS = {-5, -3, -1, 0, 1, 3, 5};
 

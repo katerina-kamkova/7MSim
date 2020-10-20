@@ -31,11 +31,11 @@ Client::Client(bool tcp, int port){
   }
 }
 
-void Client::sendWorldData(protocol::WorldData& worldData) const {
+void Client::sendWorldData(protocol::WorldData *worldData) const {
   std::cout << "HI";
-  int size = worldData.ByteSize();
+  int size = worldData->ByteSize();
   char* worldDataArray = new char[size];
-  worldData.SerializeToArray(worldDataArray, size);
+  worldData->SerializeToArray(worldDataArray, size);
 
   send(sock, worldDataArray, size, 0);
 }

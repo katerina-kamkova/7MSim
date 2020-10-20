@@ -67,7 +67,7 @@ DEF obst7 robotNew {
   name "robot_2_7"
 }
 DEF ball Solid {
-  translation 2.66 0.03 -0.71
+  translation 2.66 0.03 1.63
   children [
     Shape {
       appearance PBRAppearance {

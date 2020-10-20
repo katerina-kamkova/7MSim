@@ -45,26 +45,26 @@ int main(int argc, char **argv) {
   }*/
   std::cout << "HI3" << std::endl;
   while (supervisor->step(timeStep) != -1) {
-    protocol::WorldData worldData;
+    protocol::WorldData *worldData = new protocol::WorldData();
     
-    protocol::Coord actorCoord;
+    protocol::Coord *actorCoord = new protocol::Coord();
     const double *translation = actorTrans->getSFVec3f();
-    actorCoord.set_x(translation[0]);
-    actorCoord.set_y(translation[2]);
+    actorCoord->set_x(translation[0]);
+    actorCoord->set_y(translation[2]);
     
-    protocol::Position actorPos;
-    actorPos.set_allocated_coord(&actorCoord);
+    protocol::Position *actorPos = new protocol::Position();
+    actorPos->set_allocated_coord(actorCoord);
     const double *rot = actorRot->getSFRotation();
-    actorPos.set_theta(rot[3] - 1.57);
+    actorPos->set_theta(rot[3] - 1.57);
     
-    protocol::WheelsVelocity actorVelocity;
-    actorVelocity.set_leftwheelvelocity(leftMotor->getVelocity() / 100.0);
-    actorVelocity.set_leftwheelvelocity(rightMotor->getVelocity() / 100.0);
+    protocol::WheelsVelocity *actorVelocity = new protocol::WheelsVelocity();
+    actorVelocity->set_leftwheelvelocity(leftMotor->getVelocity() / 100.0);
+    actorVelocity->set_leftwheelvelocity(rightMotor->getVelocity() / 100.0);
     
-    protocol::RobotData actorData;
-    actorData.set_allocated_position(&actorPos);
-    actorData.set_allocated_wheelsvelocity(&actorVelocity);
-    worldData.set_allocated_robotdata(&actorData);
+    protocol::RobotData *actorData = new protocol::RobotData();
+    actorData->set_allocated_position(actorPos);
+    actorData->set_allocated_wheelsvelocity(actorVelocity);
+    worldData->set_allocated_robotdata(actorData); 
         
     /*for (int i = 1; i < n; i++){
       protocol::Coord *obstCoord = worldData.add_obstaclecoords();
@@ -73,46 +73,46 @@ int main(int argc, char **argv) {
       obstCoord->set_y(obstTranslation[2]);
     }*/
     
-    protocol::Coord *obstCoord1 = worldData.add_obstaclecoords();
+    protocol::Coord *obstCoord1 = worldData->add_obstaclecoords();
     const double *obstTranslation1 = trans1->getSFVec3f();
     obstCoord1->set_x(obstTranslation1[0]);
     obstCoord1->set_y(obstTranslation1[2]);
     
-    protocol::Coord *obstCoord2 = worldData.add_obstaclecoords();
+    protocol::Coord *obstCoord2 = worldData->add_obstaclecoords();
     const double *obstTranslation2 = trans2->getSFVec3f();
     obstCoord2->set_x(obstTranslation2[0]);
     obstCoord2->set_y(obstTranslation2[2]);
       
-    protocol::Coord *obstCoord3 = worldData.add_obstaclecoords();
+    protocol::Coord *obstCoord3 = worldData->add_obstaclecoords();
     const double *obstTranslation3 = trans3->getSFVec3f();
     obstCoord3->set_x(obstTranslation3[0]);
     obstCoord3->set_y(obstTranslation3[2]);
     
-    protocol::Coord *obstCoord4 = worldData.add_obstaclecoords();
+    protocol::Coord *obstCoord4 = worldData->add_obstaclecoords();
     const double *obstTranslation4 = trans4->getSFVec3f();
     obstCoord4->set_x(obstTranslation4[0]);
     obstCoord4->set_y(obstTranslation4[2]);
     
-    protocol::Coord *obstCoord5 = worldData.add_obstaclecoords();
+    protocol::Coord *obstCoord5 = worldData->add_obstaclecoords();
     const double *obstTranslation5 = trans5->getSFVec3f();
     obstCoord5->set_x(obstTranslation5[0]);
     obstCoord5->set_y(obstTranslation5[2]);
     
-    protocol::Coord *obstCoord6 = worldData.add_obstaclecoords();
+    protocol::Coord *obstCoord6 = worldData->add_obstaclecoords();
     const double *obstTranslation6 = trans6->getSFVec3f();
     obstCoord6->set_x(obstTranslation6[0]);
     obstCoord6->set_y(obstTranslation6[2]);
     
-    protocol::Coord *obstCoord7 = worldData.add_obstaclecoords();
+    protocol::Coord *obstCoord7 = worldData->add_obstaclecoords();
     const double *obstTranslation7 = trans7->getSFVec3f();
     obstCoord7->set_x(obstTranslation7[0]);
     obstCoord7->set_y(obstTranslation7[2]);
     
-    protocol::Coord ballCoord;
+    protocol::Coord *ballCoord = new protocol::Coord();
     const double *ballTranslation = ballTrans->getSFVec3f();
-    ballCoord.set_x(ballTranslation[0]);
-    ballCoord.set_y(ballTranslation[2]);
-    worldData.set_allocated_ballcoord(&ballCoord);
+    ballCoord->set_x(ballTranslation[0]);
+    ballCoord->set_y(ballTranslation[2]);
+    worldData->set_allocated_ballcoord(ballCoord);
       
         
     std::cout << "HI4" << std::endl;
@@ -126,11 +126,11 @@ int main(int argc, char **argv) {
     std::cout<<newVelocity.leftwheelvelocity()<<std::endl;
     std::cout<<newVelocity.rightwheelvelocity()<<std::endl;
     
-    //leftMotor->setVelocity(newVelocity.leftwheelvelocity());
-    //rightMotor->setVelocity(newVelocity.rightwheelvelocity());
+    leftMotor->setVelocity(newVelocity.leftwheelvelocity());
+    rightMotor->setVelocity(newVelocity.rightwheelvelocity());
     
-    //leftMotor->setVelocity(newVelocity.leftwheelvelocity() * (-1));
-    //rightMotor->setVelocity(newVelocity.rightwheelvelocity() * (-1));
+    leftMotor->setVelocity(newVelocity.leftwheelvelocity() * (-1));
+    rightMotor->setVelocity(newVelocity.rightwheelvelocity() * (-1));
     std::cout << "HI6" << std::endl;
   };
 

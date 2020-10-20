@@ -4,6 +4,7 @@
 
 #include <vector>
 #include <cmath>
+#include <search.h>
 #include "ObstacleAvoidance.h"
 
 protocol::WheelsVelocity ObstacleAvoidance::dwa(const protocol::WorldData& worldData)
@@ -49,6 +50,8 @@ protocol::WheelsVelocity ObstacleAvoidance::dwa(const protocol::WorldData& world
                 bestBenefit = predictBenefit;
                 bestWheelsVelocity = possibleWheelsVelocity;
             }
+
+            ClearRobotPosition(predictRobotPosition);
         }
     }
 
@@ -57,22 +60,22 @@ protocol::WheelsVelocity ObstacleAvoidance::dwa(const protocol::WorldData& world
 
 protocol::Position ObstacleAvoidance::CalculateNewPosition(const protocol::WheelsVelocity& velocity, const protocol::Position& position)
 {
-    protocol::Coord returnCoord;
+    auto *returnCoord = new protocol::Coord();
     protocol::Position returnPosition;
 
     if (std::abs(velocity.leftwheelvelocity() - velocity.rightwheelvelocity()) < 0.001)
     {
         // forward motion
-        returnCoord.set_x(position.coord().x() + velocity.rightwheelvelocity() * TAU * cos(position.theta()));
-        returnCoord.set_y(position.coord().y() + velocity.rightwheelvelocity() * TAU * sin(position.theta()));
+        returnCoord->set_x(position.coord().x() + velocity.rightwheelvelocity() * TAU * cos(position.theta()));
+        returnCoord->set_y(position.coord().y() + velocity.rightwheelvelocity() * TAU * sin(position.theta()));
 
         returnPosition.set_theta(position.theta());
     }
     else if (std::abs(velocity.leftwheelvelocity() + velocity.rightwheelvelocity()) < 0.001)
     {
         // rotation motion
-        returnCoord.set_x(position.coord().x());
-        returnCoord.set_y(position.coord().y());
+        returnCoord->set_x(position.coord().x());
+        returnCoord->set_y(position.coord().y());
 
         returnPosition.set_theta(position.theta() + ((velocity.rightwheelvelocity() - velocity.leftwheelvelocity()) * TAU / ROBOT_WIDTH));
     }
@@ -81,18 +84,16 @@ protocol::Position ObstacleAvoidance::CalculateNewPosition(const protocol::Wheel
         double R = ROBOT_WIDTH / 2. * (velocity.rightwheelvelocity() + velocity.leftwheelvelocity())
                    / (velocity.rightwheelvelocity() - velocity.leftwheelvelocity());
 
-        double deltaTheta = (velocity.rightwheelvelocity() - velocity.rightwheelvelocity()) * TAU / ROBOT_WIDTH;
+        double deltaTheta = (velocity.rightwheelvelocity() - velocity.leftwheelvelocity()) * TAU / ROBOT_WIDTH;
 
-        returnCoord.set_x(position.coord().x() + R * (sin(deltaTheta + TAU) - sin(TAU)));
-        returnCoord.set_y(position.coord().y() - R * (cos(deltaTheta + TAU) - cos(TAU)));
+        returnCoord->set_x(position.coord().x() + R * (sin(deltaTheta + TAU) - sin(TAU)));
+        returnCoord->set_y(position.coord().y() - R * (cos(deltaTheta + TAU) - cos(TAU)));
 
 
         returnPosition.set_theta(position.theta() + deltaTheta);
     }
 
-    // I forget how it works. maybe returnCoord will be lost after method end
-    // TODO: DEBUG
-    returnPosition.set_allocated_coord(&returnCoord);
+    returnPosition.set_allocated_coord(returnCoord);
 
     return returnPosition;
 }
@@ -116,5 +117,12 @@ double ObstacleAvoidance::CalculateClosestObstacleDistance(const protocol::Coord
 }
 
 double ObstacleAvoidance::CalculateDistanceBetween(const protocol::Coord& coord1, const protocol::Coord& coord2) {
-    return sqrt(pow(coord1.x() - coord2.x(), 2)+ pow(coord1.y() - coord2.y(), 2));
+    double dx = coord1.x() - coord2.x();
+    double dy = coord1.y() - coord2.y();
+
+    return sqrt(pow(dx, 2)+ pow(dy, 2));
+}
+
+void ObstacleAvoidance::ClearRobotPosition(protocol::Position position) {
+    position.clear_coord();
 }

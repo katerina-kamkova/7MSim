@@ -16,13 +16,15 @@ private:
     static protocol::Position CalculateNewPosition(const protocol::WheelsVelocity& velocity, const protocol::Position& position);
     static double CalculateClosestObstacleDistance(const protocol::Coord& robotCoord, const google::protobuf::RepeatedPtrField<protocol::Coord>& obstacleCoords);
     static double CalculateDistanceBetween(const protocol::Coord& coord1, const protocol::Coord& coord2);
+
+    static void ClearRobotPosition(protocol::Position position);
 };
 
-const int OBSTACLE_RADIUS = 1;
-const int ROBOT_RADIUS = 1;
-const int ROBOT_WIDTH = ROBOT_RADIUS * 2;
-const int ROBOT_MAX_VELOCITY = 1;
-const int ROBOT_MAX_ACCELERATION = 1;
+const double OBSTACLE_RADIUS = 0.1;
+const double ROBOT_RADIUS = 0.1;
+const double ROBOT_WIDTH = ROBOT_RADIUS * 2;
+const double ROBOT_MAX_VELOCITY = 0.7;
+const double ROBOT_MAX_ACCELERATION = 1.;
 const int FORWARD_WEIGHT = 200;
 const int OBSTACLE_WEIGHT = 6666;
 const double DT = 0.1;

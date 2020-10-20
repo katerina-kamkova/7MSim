@@ -15,12 +15,11 @@ int main(int argc, char **argv) {
   leftMotor->setPosition(INFINITY);
   rightMotor->setPosition(INFINITY);
   
-  leftMotor->setVelocity(0);
-  rightMotor->setVelocity(0);
+  leftMotor->setVelocity(20);
+  rightMotor->setVelocity(20);
  
   while (supervisor->step(timeStep) != -1) {
-    leftMotor->setVelocity(-10);
-    rightMotor->setVelocity(-10);
+    
   };
 
   delete leftMotor;

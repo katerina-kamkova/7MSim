@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.9998336664707731 -0.013282510848754288 -0.012498571804948774 1.5101660408711788
-  position 0.1099089181498103 9.118207266239938 0.7066746522693261
+  orientation -0.972864212458101 0.20360434520896364 0.1099113039241579 1.0131721112677503
+  position 0.6365712340974734 6.497312180404466 4.500554358588258
 }
 TexturedBackground {
 }
@@ -29,53 +29,52 @@ DEF obst1 robotNew {
   robotTeam "2"
   robotNumber "1"
   name "robot_2_1"
+  controller "movingObstacleController"
 }
 DEF obst2 robotNew {
   translation -0.81 0.0675 0.1
   robotTeam "2"
   robotNumber "2"
   name "robot_2_2"
+  controller "movingObstacleController"
 }
 DEF obst3 robotNew {
   translation -0.16 0.0675 0.2
   robotTeam "2"
   robotNumber "3"
   name "robot_2_3"
+  controller "movingObstacleController"
 }
 DEF obst4 robotNew {
   translation 0.44 0.0675 0.3
   robotTeam "2"
   robotNumber "4"
   name "robot_2_4"
+  controller "movingObstacleController"
 }
 DEF obst5 robotNew {
   translation 0.94 0.0675 0.4
   robotTeam "2"
   robotNumber "5"
   name "robot_2_5"
+  controller "movingObstacleController"
 }
 DEF obst6 robotNew {
   translation 1.43 0.0675 0.5
   robotTeam "2"
   robotNumber "6"
   name "robot_2_6"
+  controller "movingObstacleController"
 }
 DEF obst7 robotNew {
   translation 1.9 0.0675 0.6
   robotTeam "2"
   robotNumber "7"
   name "robot_2_7"
+  controller "movingObstacleController"
 }
-DEF ball Solid {
-  translation 2.66 0.03 1.63
-  children [
-    Shape {
-      appearance PBRAppearance {
-      }
-      geometry Sphere {
-        radius 0.03
-        subdivision 5
-      }
-    }
-  ]
+DEF ball ball {
+  translation 2.29 0.02 1.79
+  radius 0.02
+  mass 0.05
 }

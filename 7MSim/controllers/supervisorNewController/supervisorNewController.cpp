@@ -8,6 +8,18 @@
 
 using namespace webots;
 
+const double length = 3;
+const double width = 2;
+
+const double robotRadius = 0.0675;
+const double ballRadius = 0.02;
+
+const int n = 7;
+
+double randInRange (double a, double b){
+  return (double)std::rand() * (b - a) / RAND_MAX + a;
+}
+
 int main(int argc, char **argv) {
   Supervisor *supervisor = new Supervisor();
   int timeStep = (int)supervisor->getBasicTimeStep();
@@ -20,28 +32,34 @@ int main(int argc, char **argv) {
  
   leftMotor->setVelocity(0);
   rightMotor->setVelocity(0);
-  std::cout << "HI1" << std::endl;
-  Client *client = new Client(true, 4343);                      // соединение с SSL-vision/game
-  std::cout << "HI2" << std::endl;
+  
+  Client *client = new Client(true, 4343);
+  
   Node *actor = supervisor->getFromDef("actor");                // поля робота
   Field *actorTrans = actor->getField("translation");
-  Field *actorRot = actor->getField("rotation");                 
+  Field *actorRot = actor->getField("rotation");
   
-  Field *trans1 = supervisor->getFromDef("obst1")->getField("translation");
-  Field *trans2 = supervisor->getFromDef("obst2")->getField("translation");
-  Field *trans3 = supervisor->getFromDef("obst3")->getField("translation");
-  Field *trans4 = supervisor->getFromDef("obst4")->getField("translation");
-  Field *trans5 = supervisor->getFromDef("obst5")->getField("translation");
-  Field *trans6 = supervisor->getFromDef("obst6")->getField("translation");
-  Field *trans7 = supervisor->getFromDef("obst7")->getField("translation");
-  
+  Field *translations[n];
+  Field *rotations[n];
+  for (int i = 0; i < n; i++) {
+    translations[i] = supervisor->getFromDef("obst" + std::to_string(i + 1))->getField("translation");
+    const double randomPosition[3] = {randInRange(- length + 0.1, length - 0.1), 0.0675, randInRange(- width + 0.1, width - 0.1)};
+    translations[i]->setSFVec3f(randomPosition);
+    
+    rotations[i] = supervisor->getFromDef("obst" + std::to_string(i + 1))->getField("rotation");
+    double newRotation[4];
+    newRotation[0] = 0.0;
+    newRotation[1] = 1.0;
+    newRotation[2] = 0.0;
+    newRotation[3] = randInRange(0, M_PI * 2);
+    
+    rotations[i]->setSFRotation(newRotation);
+    
+    //robot->resetPhysics();
+  }    
+ 
   Field *ballTrans = supervisor->getFromDef("ball")->getField("translation");
   
-  /*for (int i = 0; i < n; i ++)  {
-    robots[i] = supervisor->getFromDef("obst" + (i + 1));
-    trans[i] = robots[i]->getField("translation");
-  }*/
-  std::cout << "HI3" << std::endl;
   while (supervisor->step(timeStep) != -1) {
     protocol::WorldData *worldData = new protocol::WorldData();
     
@@ -64,76 +82,38 @@ int main(int argc, char **argv) {
     actorData->set_allocated_wheelsvelocity(actorVelocity);
     worldData->set_allocated_robotdata(actorData); 
         
-    /*for (int i = 1; i < n; i++){
-      protocol::Coord *obstCoord = worldData.add_obstaclecoords();
-      const double *obstTranslation = trans[i]->getSFVec3f();
+    for (int i = 0; i < n; i++){
+      protocol::Coord *obstCoord = worldData->add_obstaclecoords();
+      const double *obstTranslation = translations[i]->getSFVec3f();
       obstCoord->set_x(obstTranslation[0]);
-      obstCoord->set_y(obstTranslation[2]);
-    }*/
-    
-    protocol::Coord *obstCoord1 = worldData->add_obstaclecoords();
-    const double *obstTranslation1 = trans1->getSFVec3f();
-    obstCoord1->set_x(obstTranslation1[0]);
-    obstCoord1->set_y(obstTranslation1[2] * (-1));
-    
-    protocol::Coord *obstCoord2 = worldData->add_obstaclecoords();
-    const double *obstTranslation2 = trans2->getSFVec3f();
-    obstCoord2->set_x(obstTranslation2[0]);
-    obstCoord2->set_y(obstTranslation2[2] * (-1));
+      obstCoord->set_y(obstTranslation[2] * (-1));
       
-    protocol::Coord *obstCoord3 = worldData->add_obstaclecoords();
-    const double *obstTranslation3 = trans3->getSFVec3f();
-    obstCoord3->set_x(obstTranslation3[0]);
-    obstCoord3->set_y(obstTranslation3[2] * (-1));
+      /*if (obstTranslation[0] < - length + 0.1 || obstTranslation[0] > length - 0.1 ||
+          obstTranslation[2] < - width + 0.1 || obstTranslation[2] > width - 0.1)
+      { 
+        const double *rot = rotations[i]->getSFRotation();
+        double newRotation[4];
+        newRotation[0] = 0.0;
+        newRotation[1] = 1.0;
+        newRotation[2] = 0.0;
+        newRotation[3] = rot[3] + M_PI / 2;
     
-    protocol::Coord *obstCoord4 = worldData->add_obstaclecoords();
-    const double *obstTranslation4 = trans4->getSFVec3f();
-    obstCoord4->set_x(obstTranslation4[0]);
-    obstCoord4->set_y(obstTranslation4[2] * (-1));
-    
-    protocol::Coord *obstCoord5 = worldData->add_obstaclecoords();
-    const double *obstTranslation5 = trans5->getSFVec3f();
-    obstCoord5->set_x(obstTranslation5[0]);
-    obstCoord5->set_y(obstTranslation5[2] * (-1));
-    
-    protocol::Coord *obstCoord6 = worldData->add_obstaclecoords();
-    const double *obstTranslation6 = trans6->getSFVec3f();
-    obstCoord6->set_x(obstTranslation6[0]);
-    obstCoord6->set_y(obstTranslation6[2] * (-1));
-    
-    protocol::Coord *obstCoord7 = worldData->add_obstaclecoords();
-    const double *obstTranslation7 = trans7->getSFVec3f();
-    obstCoord7->set_x(obstTranslation7[0]);
-    obstCoord7->set_y(obstTranslation7[2] * (-1));
+        rotations[i]->setSFRotation(newRotation);
+      }*/
+    }
     
     protocol::Coord *ballCoord = new protocol::Coord();
     const double *ballTranslation = ballTrans->getSFVec3f();
     ballCoord->set_x(ballTranslation[0]);
     ballCoord->set_y(ballTranslation[2] * (-1));
     worldData->set_allocated_ballcoord(ballCoord);
-      
-        
-    std::cout << "HI4" << std::endl;
-    
-    client->sendWorldData(worldData);
-    
+   
+    client->sendWorldData(worldData);    
     protocol::WheelsVelocity newVelocity = client->getNewVelocity();
-    
-    std::cout << "HI6" << std::endl;
-    
-    std::cout<<newVelocity.leftwheelvelocity()<<std::endl;
-    std::cout<<newVelocity.rightwheelvelocity()<<std::endl;
-    
-    std::cout<<leftMotor->getVelocity()<<std::endl;
-    std::cout<<rightMotor->getVelocity()<<std::endl;
     
     leftMotor->setVelocity(newVelocity.leftwheelvelocity() * 50.0);
     rightMotor->setVelocity(newVelocity.rightwheelvelocity() * 50.0);
     
-    std::cout<<leftMotor->getVelocity()<<std::endl;
-    std::cout<<rightMotor->getVelocity()<<std::endl;
-    
-    std::cout << "HI6" << std::endl;
   };
 
   delete supervisor;

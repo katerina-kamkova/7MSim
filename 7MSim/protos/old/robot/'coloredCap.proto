@@ -8,7 +8,7 @@ PROTO coloredCap[
     local num = fields.robotNumber.value
   }%
   Transform {
-    translation 0 0.0275 0
+    translation 0 0.095 0
     rotation 0 1 0 3.141592653589793
     children [
       Shape {

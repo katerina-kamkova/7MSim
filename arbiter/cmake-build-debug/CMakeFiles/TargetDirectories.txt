@@ -1,3 +1,0 @@
-/home/katherine/CLionProjects/arbiter/cmake-build-debug/CMakeFiles/rebuild_cache.dir
-/home/katherine/CLionProjects/arbiter/cmake-build-debug/CMakeFiles/edit_cache.dir
-/home/katherine/CLionProjects/arbiter/cmake-build-debug/CMakeFiles/arbiter.dir

@@ -3,8 +3,8 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.972864212458101 0.20360434520896364 0.1099113039241579 1.0131721112677503
-  position 0.6365712340974734 6.497312180404466 4.500554358588258
+  orientation -0.8005219954085062 -0.5244950159313865 -0.2899474316670493 1.2087314318312077
+  position -2.836937015880944 6.898927406182228 3.73749365408307
 }
 TexturedBackground {
 }
@@ -18,55 +18,55 @@ soccerField {
 Robot {
   supervisor TRUE
 }
-DEF actor robotNew {
+DEF actor robot {
   translation -2.3 0.0675 0
   rotation 0 1 0 1.5707996938995747
-  controller "supervisorNewController"
+  controller "actorController"
   supervisor TRUE
 }
-DEF obst1 robotNew {
+DEF obst1 robot {
   translation -1.34 0.0675 0
   robotTeam "2"
   robotNumber "1"
   name "robot_2_1"
   controller "movingObstacleController"
 }
-DEF obst2 robotNew {
+DEF obst2 robot {
   translation -0.81 0.0675 0.1
   robotTeam "2"
   robotNumber "2"
   name "robot_2_2"
   controller "movingObstacleController"
 }
-DEF obst3 robotNew {
+DEF obst3 robot {
   translation -0.16 0.0675 0.2
   robotTeam "2"
   robotNumber "3"
   name "robot_2_3"
   controller "movingObstacleController"
 }
-DEF obst4 robotNew {
+DEF obst4 robot {
   translation 0.44 0.0675 0.3
   robotTeam "2"
   robotNumber "4"
   name "robot_2_4"
   controller "movingObstacleController"
 }
-DEF obst5 robotNew {
+DEF obst5 robot {
   translation 0.94 0.0675 0.4
   robotTeam "2"
   robotNumber "5"
   name "robot_2_5"
   controller "movingObstacleController"
 }
-DEF obst6 robotNew {
+DEF obst6 robot {
   translation 1.43 0.0675 0.5
   robotTeam "2"
   robotNumber "6"
   name "robot_2_6"
   controller "movingObstacleController"
 }
-DEF obst7 robotNew {
+DEF obst7 robot {
   translation 1.9 0.0675 0.6
   robotTeam "2"
   robotNumber "7"

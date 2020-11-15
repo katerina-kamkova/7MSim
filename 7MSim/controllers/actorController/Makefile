@@ -66,7 +66,13 @@
 ###-----------------------------------------------------------------------------
 
 ### Do not modify: this includes Webots global Makefile.include
-space :=
-space +=
+
+CXX_SOURCES = actorController.cpp world_data.pb.cc
+INCLUDE = -I"/usr/local/include"
+LIBRARIES = -L"/usr/local/lib" -lprotobuf
+CFLAGS = --std=c++14 -pthread 
+
+null :=
+space := $(null) $(null)
 WEBOTS_HOME_PATH=$(subst $(space),\ ,$(strip $(subst \,/,$(WEBOTS_HOME))))
 include $(WEBOTS_HOME_PATH)/resources/Makefile.include

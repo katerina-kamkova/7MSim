@@ -1,12 +1,11 @@
 PROTO robot[
-  field SFVec3f    translation      0 0.0675 0                
+  field SFVec3f    translation      0 0 0                
   field SFRotation rotation         0 1 0 0
   field SFString   robotTeam        "1"                      # 1 or 2
   field SFString   robotNumber      "0"                      # any natural number from 0 to 15
   field SFString   name             "robot_1_0"              # any string
   field SFString   controller       "easyRobotController"    # any string
   field SFBool     synchronization  TRUE                     # {TRUE, FALSE}
-  field SFBool     supervisor       FALSE                    # {TRUE, FALSE}
 ]
 {
   %{
@@ -22,50 +21,19 @@ PROTO robot[
         robotTeam IS robotTeam
         robotNumber IS robotNumber
       }
+      cap{
+      }
       Transform {
+        translation 0 0.0675 0
         rotation 0 1 0 3.141592653589793
         children [
-          cap {
-          }
           body {
           }
         ]
       }
       HingeJoint {
         jointParameters HingeJointParameters {
-          anchor -0.047 -0.0455 0
-        }
-        device [
-          RotationalMotor {
-            name "rightMotor"
-            maxVelocity 100
-          }
-        ]
-        endPoint Solid {
-          translation -0.047 -0.0455 0
-          rotation 0 0 1 1.5707996938995745
-          children [
-            DEF wheel Shape {
-              appearance PBRAppearance {
-                roughness 1
-                metalness 0
-              }
-              geometry Cylinder {
-                height 0.018
-                radius 0.022
-                subdivision 50
-              }
-            }
-          ]
-          name "right_solid_%{=team}%_%{=num}%"
-          boundingObject USE wheel
-          physics Physics {
-          }
-        }
-      }
-      HingeJoint {
-        jointParameters HingeJointParameters {
-          anchor 0.047 -0.0455 0
+          anchor 0.047 0.0225 0
         }
         device [
           RotationalMotor {
@@ -74,33 +42,87 @@ PROTO robot[
           }
         ]
         endPoint Solid {
-          translation 0.047 -0.0455 0
-          rotation 0 0 1 1.5707996938995745
+          translation 0 0.0675 0
+          rotation 1 0 0 0
           children [
-            USE wheel
+            Transform {
+              rotation 0 1 0 3.141592653589793
+              children [
+                lWheel {
+                }
+              ]
+            }
           ]
-          name "left_solid_%{=team}%_%{=num}%"
-          boundingObject USE wheel
+          boundingObject Transform {
+            translation 0.047 -0.045 0
+            rotation 0 0 1 1.5707996938995747
+            children [
+              DEF wheel Cylinder {
+                height 0.017
+                radius 0.0224
+              }
+            ]
+          }
+          physics Physics {
+          }
+        }
+      }
+      HingeJoint {
+        jointParameters HingeJointParameters {
+          anchor -0.047 0.0225 0
+        }
+        device [
+          RotationalMotor {
+            name "rightMotor"
+            maxVelocity 100 
+          }
+        ]
+        endPoint Solid {
+          translation 0 0.0675 0
+          rotation 1 0 0 0
+          children [
+            Transform {
+              rotation 0 1 0 3.141592653589793
+              children [
+                rWheel {
+                }
+              ]
+            }
+          ]
+          name "solid_%{=team}%_%{=num}%"
+          boundingObject Transform {
+            translation -0.047 -0.045 0
+            rotation 0 0 1 1.5707903061004251
+            children [
+              USE wheel
+            ]
+          }
           physics Physics {
           }
         }
       }
       smallWheel {
-        translation 0 -0.0615 -0.039
+        translation 0 0.006 0.039
       }
       smallWheel {
-        translation 0 -0.0615 0.039
+        translation 0 0.006 -0.039
       }
     ]
     name "robot_%{=team}%_%{=num}%"
     boundingObject Group {
       children [
-        cap {
-        }
-        body {
+        cap{
         }
         Transform {
-          translation 0 -0.0615 -0.039
+          translation 0 0.0675 0
+          rotation 0 1 0 3.141592653589793
+          children [
+            body {
+            }
+          ]
+        }
+        Transform {
+          translation 0 0.006 0.039
           children [
             DEF smallBall Shape {
               geometry Sphere {
@@ -111,7 +133,7 @@ PROTO robot[
           ]
         }
         Transform {
-          translation 0 -0.0615 0.039
+          translation 0 0.006 -0.039
           children [
             USE smallBall
           ]
@@ -120,13 +142,12 @@ PROTO robot[
     }
     physics Physics {
       density -1
-      mass 0.6
+      mass 0.522
       centerOfMass [
-        0 -0.04 0
+        0 0.053 0
       ]
     }
     controller IS controller
     synchronization IS synchronization
-    supervisor IS supervisor
   }
 }

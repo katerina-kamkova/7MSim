@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package protocol;
+
+message Coord {
+    double x = 1;
+    double y = 2;
+}
+
+message Position {
+    Coord coord = 1;
+    double theta = 2;
+}
+
+message WheelsVelocity {
+    double leftWheelVelocity = 1;
+    double rightWheelVelocity = 2;
+}
+
+message RobotData {
+    Position position = 1;
+    WheelsVelocity wheelsVelocity = 2;
+}
+
+message WorldData {
+    RobotData robotData = 1;
+    repeated Coord obstacleCoords = 2;
+    Coord ballCoord = 3;
+}

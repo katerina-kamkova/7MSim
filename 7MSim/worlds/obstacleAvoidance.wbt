@@ -15,13 +15,14 @@ soccerField {
   width 4
   lineThickness 0.02
 }
-Robot {
-  supervisor TRUE
+camera {
+  length 6
+  width 4
+  controller "cameraController"
 }
 DEF actor robot {
   translation -2.3 0.0675 0
   rotation 0 1 0 1.5707996938995747
-  controller "actorController"
   supervisor TRUE
 }
 DEF obst1 robot {
@@ -29,49 +30,42 @@ DEF obst1 robot {
   robotTeam "2"
   robotNumber "1"
   name "robot_2_1"
-  controller "movingObstacleController"
 }
 DEF obst2 robot {
   translation -0.81 0.0675 0.1
   robotTeam "2"
   robotNumber "2"
   name "robot_2_2"
-  controller "movingObstacleController"
 }
 DEF obst3 robot {
   translation -0.16 0.0675 0.2
   robotTeam "2"
   robotNumber "3"
   name "robot_2_3"
-  controller "movingObstacleController"
 }
 DEF obst4 robot {
   translation 0.44 0.0675 0.3
   robotTeam "2"
   robotNumber "4"
   name "robot_2_4"
-  controller "movingObstacleController"
 }
 DEF obst5 robot {
   translation 0.94 0.0675 0.4
   robotTeam "2"
   robotNumber "5"
   name "robot_2_5"
-  controller "movingObstacleController"
 }
 DEF obst6 robot {
   translation 1.43 0.0675 0.5
   robotTeam "2"
   robotNumber "6"
   name "robot_2_6"
-  controller "movingObstacleController"
 }
 DEF obst7 robot {
   translation 1.9 0.0675 0.6
   robotTeam "2"
   robotNumber "7"
   name "robot_2_7"
-  controller "movingObstacleController"
 }
 DEF ball ball {
   translation 2.29 0.02 1.79

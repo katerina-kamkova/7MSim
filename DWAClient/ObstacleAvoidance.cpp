@@ -7,6 +7,34 @@
 #include <search.h>
 #include "ObstacleAvoidance.h"
 
+protocol::WorldData calculateWheelsSpeed(const protocol::WorldData& previousWorldData, const protocol::WorldData& currentWorldData)
+{
+    const double wheelRadius = 0.022;
+    const double wheelCenterDist = 0.0473207143;
+
+    const double xDiff = currentWorldData.robotdata().position().coord().x() -
+    previousWorldData.robotdata().position().coord().x();
+    const double yDiff = currentWorldData.robotdata().position().coord().y() -
+    previousWorldData.robotdata().position().coord().y();
+    const double thetaDiff = currentWorldData.robotdata().position().theta() -
+    previousWorldData.robotdata().position().theta();
+
+    const double mult = wheelRadius * (xDiff + yDiff) / (2 * wheelCenterDist);
+    const double rightWheel = cos(thetaDiff) * mult;
+    const double leftWheel = sin(thetaDiff) * mult;
+
+    auto *velocity = new protocol::WheelsVelocity;
+    velocity->set_rightwheelvelocity(rightWheel);
+    velocity->set_leftwheelvelocity(leftWheel);
+
+    protocol::WorldData worldData = previousWorldData;
+    protocol::RobotData robot = worldData.robotdata();
+    robot.set_allocated_wheelsvelocity(velocity);
+    worldData.set_allocated_robotdata(&robot);
+
+    return worldData;
+}
+
 protocol::WheelsVelocity ObstacleAvoidance::dwa(const protocol::WorldData& worldData)
 {
     auto bestBenefit = -100000;

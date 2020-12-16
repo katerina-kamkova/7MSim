@@ -3,72 +3,54 @@ WorldInfo {
   coordinateSystem "NUE"
 }
 Viewpoint {
-  orientation -0.8005219954085062 -0.5244950159313865 -0.2899474316670493 1.2087314318312077
-  position -2.836937015880944 6.898927406182228 3.73749365408307
+  orientation -0.9932053825268102 -0.09505175544517315 -0.06714336829921178 1.2364329883596143
+  position -1.0217060738387185 7.866463587323636 2.6359291475806006
 }
 TexturedBackground {
 }
 TexturedBackgroundLight {
+  castShadows FALSE
 }
 soccerField {
   length 6
   width 4
   lineThickness 0.02
 }
-camera {
-  length 6
-  width 4
-  controller "cameraController"
-}
 DEF actor robot {
   translation -2.3 0.0675 0
   rotation 0 1 0 1.5707996938995747
+  controller ""
   supervisor TRUE
+}
+Robot {
+  translation 0 2.75 0
+  rotation 1 0 0 -1.5707996938995747
+  children [
+    Camera {
+      translation 0 0 1.31
+      fieldOfView 1.44
+      width 1024
+      height 768
+    }
+  ]
+  controller "cameraController"
 }
 DEF obst1 robot {
   translation -1.34 0.0675 0
   robotTeam "2"
   robotNumber "1"
   name "robot_2_1"
+  controller ""
 }
 DEF obst2 robot {
   translation -0.81 0.0675 0.1
   robotTeam "2"
   robotNumber "2"
   name "robot_2_2"
-}
-DEF obst3 robot {
-  translation -0.16 0.0675 0.2
-  robotTeam "2"
-  robotNumber "3"
-  name "robot_2_3"
-}
-DEF obst4 robot {
-  translation 0.44 0.0675 0.3
-  robotTeam "2"
-  robotNumber "4"
-  name "robot_2_4"
-}
-DEF obst5 robot {
-  translation 0.94 0.0675 0.4
-  robotTeam "2"
-  robotNumber "5"
-  name "robot_2_5"
-}
-DEF obst6 robot {
-  translation 1.43 0.0675 0.5
-  robotTeam "2"
-  robotNumber "6"
-  name "robot_2_6"
-}
-DEF obst7 robot {
-  translation 1.9 0.0675 0.6
-  robotTeam "2"
-  robotNumber "7"
-  name "robot_2_7"
+  controller ""
 }
 DEF ball ball {
-  translation 2.29 0.02 1.79
+  translation -1.63 0.02 0.26
   radius 0.02
   mass 0.05
 }

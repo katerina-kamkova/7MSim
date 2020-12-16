@@ -59,6 +59,8 @@ int main(int argc, char **argv) {
     send(connection, &height, sizeof(unsigned int), 0);
     const unsigned char* picture = camera->getImage();
     send(connection, picture, pictureSize, 0); 
+    
+    sleep(0.5);
   };
   
   close(connection);

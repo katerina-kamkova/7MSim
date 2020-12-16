@@ -23,7 +23,7 @@ PROTO coloredCap[
         }
         geometry Cylinder {
           height 0.0001
-          radius 0.0675
+          radius 0.085
           subdivision 30
         }
       }

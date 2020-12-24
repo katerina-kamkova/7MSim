@@ -1,0 +1,206 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="DWAClient"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/home/yarkoe/projects/7MSim/DWAClient"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/home/yarkoe/projects/7MSim/DWAClient"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/home/yarkoe/projects/7MSim/DWAClient"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DWAClient">
+				<Option output="/home/yarkoe/projects/7MSim/DWAClient/DWAClient" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/yarkoe/projects/7MSim/DWAClient"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/yarkoe/projects/7MSim/DWAClient"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 DWAClient"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="DWAClient/fast">
+				<Option output="/home/yarkoe/projects/7MSim/DWAClient/DWAClient" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/home/yarkoe/projects/7MSim/DWAClient"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/home/yarkoe/projects/7MSim/DWAClient"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 DWAClient/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/home/yarkoe/projects/7MSim/DWAClient/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/ObstacleAvoidance.cpp">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/ObstacleAvoidance.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/TCPServer.cpp">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/TCPServer.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/UDPServer.cpp">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/UDPServer.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/main.cpp">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_detection.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_detection.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_detection.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_detection_tracked.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_detection_tracked.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_detection_tracked.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_geometry.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_geometry.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_geometry.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_geometry_legacy.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_geometry_legacy.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_geometry_legacy.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_refbox_log.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_refbox_log.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_refbox_log.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper_legacy.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper_legacy.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper_legacy.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper_tracked.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper_tracked.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/messages_robocup_ssl_wrapper_tracked.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/world_data.pb.cc">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/world_data.pb.h">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/world_data.pb.h.rule">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/ssl-vision/messages_robocup_ssl_detection.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/ssl-vision/messages_robocup_ssl_detection_tracked.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/ssl-vision/messages_robocup_ssl_geometry.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/ssl-vision/messages_robocup_ssl_geometry_legacy.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/ssl-vision/messages_robocup_ssl_refbox_log.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/ssl-vision/messages_robocup_ssl_wrapper.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/ssl-vision/messages_robocup_ssl_wrapper_legacy.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/ssl-vision/messages_robocup_ssl_wrapper_tracked.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/protobuf/world_data.proto">
+			<Option target="DWAClient"/>
+		</Unit>
+		<Unit filename="/home/yarkoe/projects/7MSim/DWAClient/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

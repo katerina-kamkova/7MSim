@@ -4,11 +4,13 @@ project(${PROJECT_NAME})
 
 find_package(Protobuf REQUIRED)
 
-set(PROTO_FILES ../protobuf/world_data.proto)
+file (GLOB PROTO_FILES ../protobuf/ssl-vision/*.proto)
+set(WORLD_DATA_PROTO_FILE ../protobuf/world_data.proto)
 
-PROTOBUF_GENERATE_CPP(PROTO_SRC PROTO_HDR ${PROTO_FILES})
+PROTOBUF_GENERATE_CPP(PROTO_SRC PROTO_HDR ${PROTO_FILES} ${WORLD_DATA_PROTO_FILE})
 
-add_executable(DWAClient main.cpp ObstacleAvoidance.h ObstacleAvoidance.cpp ${PROTO_SRC} ${PROTO_HDR} ${PROTO_FILES} TCPServer.h  TCPServer.cpp )
+add_executable(DWAClient main.cpp ${PROTO_SRC} ${PROTO_HDR} ${PROTO_FILES} ${WORLD_DATA_PROTO_FILE} UDPServer.h UDPServer.cpp
+        TCPServer.h TCPServer.cpp ObstacleAvoidance.h ObstacleAvoidance.cpp)
 
 target_include_directories(${PROJECT_NAME}
         PUBLIC ${CMAKE_CURRENT_BINARY_DIR}

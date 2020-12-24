@@ -20,8 +20,8 @@ private:
     static void ClearRobotPosition(protocol::Position position);
 };
 
-const double OBSTACLE_RADIUS = 0.1;
-const double ROBOT_RADIUS = 0.1;
+const double OBSTACLE_RADIUS = 5;
+const double ROBOT_RADIUS = 5;
 const double ROBOT_WIDTH = ROBOT_RADIUS * 2;
 const double ROBOT_MAX_VELOCITY = 0.7;
 const double ROBOT_MAX_ACCELERATION = 1.;

@@ -4,7 +4,6 @@
 
 #include <vector>
 #include <cmath>
-#include <search.h>
 #include "ObstacleAvoidance.h"
 
 protocol::WheelsVelocity ObstacleAvoidance::dwa(const protocol::WorldData& worldData)

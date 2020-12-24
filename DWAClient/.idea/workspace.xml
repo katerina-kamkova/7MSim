@@ -25,11 +25,32 @@
   </component>
   <component name="CMakeSettings">
     <configurations>
-      <configuration PROFILE_NAME="Debug" CONFIG_NAME="Debug" ENABLED="true" />
+      <configuration PROFILE_NAME="Default" GENERATION_DIR="." ENABLED="true" />
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="b7ea8ebf-8466-4c25-8de7-e666c5f6c132" name="Default Changelist" comment="fix dwa" />
+    <list default="true" id="b7ea8ebf-8466-4c25-8de7-e666c5f6c132" name="Default Changelist" comment="Exclude some robots and set camera in webots project">
+      <change afterPath="$PROJECT_DIR$/UDPServer.cpp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/UDPServer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/controllers/actorController/actorController" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/controllers/actorController/actorController" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/controllers/actorController/actorController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/controllers/actorController/actorController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/controllers/actorController/build/release/actorController" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/controllers/actorController/build/release/actorController" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/controllers/actorController/build/release/actorController.o" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/controllers/actorController/build/release/actorController.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/controllers/cameraController/build/release/cameraController" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/controllers/cameraController/build/release/cameraController" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/controllers/cameraController/build/release/cameraController.o" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/controllers/cameraController/build/release/cameraController.o" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/controllers/cameraController/cameraController" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/controllers/cameraController/cameraController" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/controllers/cameraController/cameraController.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/controllers/cameraController/cameraController.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/worlds/.obstacleAvoidance.wbproj" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/worlds/.obstacleAvoidance.wbproj" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../7MSim/worlds/obstacleAvoidance.wbt" beforeDir="false" afterPath="$PROJECT_DIR$/../7MSim/worlds/obstacleAvoidance.wbt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CMakeLists.txt" beforeDir="false" afterPath="$PROJECT_DIR$/CMakeLists.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ObstacleAvoidance.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/ObstacleAvoidance.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ObstacleAvoidance.h" beforeDir="false" afterPath="$PROJECT_DIR$/ObstacleAvoidance.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TCPServer.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/TCPServer.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TCPServer.h" beforeDir="false" afterPath="$PROJECT_DIR$/TCPServer.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.cpp" beforeDir="false" afterPath="$PROJECT_DIR$/main.cpp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../protobuf/world_data.proto" beforeDir="false" afterPath="$PROJECT_DIR$/../protobuf/world_data.proto" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -38,6 +59,7 @@
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="CMakeBuildProfile:Default" />
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
@@ -56,7 +78,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../curFolder/7MSim/DWAClient" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -64,15 +86,10 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="CMakeSettings" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RunManager">
-    <configuration name="DWAClient" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DWAClient" TARGET_NAME="DWAClient" CONFIG_NAME="Debug" RUN_TARGET_PROJECT_NAME="DWAClient" RUN_TARGET_NAME="DWAClient">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true">
+    <configuration name="DWAClient" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="DWAClient" TARGET_NAME="DWAClient" CONFIG_NAME="Default" RUN_TARGET_PROJECT_NAME="DWAClient" RUN_TARGET_NAME="DWAClient">
       <method v="2">
         <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
@@ -102,6 +119,15 @@
       <workItem from="1607765913361" duration="320000" />
       <workItem from="1607766251885" duration="666000" />
       <workItem from="1607767613884" duration="696000" />
+      <workItem from="1608041689026" duration="44000" />
+      <workItem from="1608124591698" duration="5312000" />
+      <workItem from="1608138363336" duration="1496000" />
+      <workItem from="1608141703863" duration="5630000" />
+      <workItem from="1608199847150" duration="4776000" />
+      <workItem from="1608214587984" duration="5283000" />
+      <workItem from="1608223202629" duration="630000" />
+      <workItem from="1608224355822" duration="1890000" />
+      <workItem from="1608226952483" duration="1264000" />
     </task>
     <task id="LOCAL-00001" summary="init dwa">
       <created>1601907797138</created>
@@ -166,7 +192,14 @@
       <option name="project" value="LOCAL" />
       <updated>1603205191820</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Exclude some robots and set camera in webots project">
+      <created>1608124963173</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1608124963173</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -190,44 +223,40 @@
     <MESSAGE value="added tcp server" />
     <MESSAGE value="deleted robot client" />
     <MESSAGE value="fix dwa" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix dwa" />
+    <MESSAGE value="Exclude some robots and set camera in webots project" />
+    <option name="LAST_COMMIT_MESSAGE" value="Exclude some robots and set camera in webots project" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
-          <url>file://$PROJECT_DIR$/main.cpp</url>
-          <line>42</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ObstacleAvoidance.cpp</url>
-          <line>62</line>
+          <line>61</line>
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ObstacleAvoidance.cpp</url>
-          <line>32</line>
+          <line>31</line>
           <option name="timeStamp" value="7" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ObstacleAvoidance.cpp</url>
-          <line>35</line>
+          <line>34</line>
           <option name="timeStamp" value="8" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ObstacleAvoidance.cpp</url>
-          <line>49</line>
+          <line>48</line>
           <option name="timeStamp" value="13" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ObstacleAvoidance.cpp</url>
-          <line>40</line>
+          <line>39</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/ObstacleAvoidance.cpp</url>
-          <line>43</line>
+          <line>42</line>
           <option name="timeStamp" value="18" />
         </line-breakpoint>
       </breakpoints>

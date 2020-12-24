@@ -4,43 +4,38 @@
 
 #include <sys/socket.h>
 #include <unistd.h>
+#include <sys/types.h>
+#include <arpa/inet.h>
+#include <netinet/in.h>
+#include <iostream>
+#include <cstring>
 
-#include "TCPServer.h"
+#include "UDPServer.h"
 
-struct sockaddr_in serverAddr;
+struct sockaddr_in udpServerAddr, clientAddr;
+struct ip_mreq mreq;
 
-TCPServer::TCPServer(unsigned short port) {
+UDPServer::UDPServer(const std::string group, unsigned const short port) {
+    this->group = group;
     serverPort = port;
 
-    ExitIfTrue((serverSocket = socket(AF_INET, SOCK_STREAM, 0)) == 0, "Socket failed");
+    ExitIfTrue((serverSocket = socket(AF_INET, SOCK_DGRAM, 0)) < 0, "Socket failed");
 
-    int opt = 1;
-    ExitIfTrue(setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT, &opt, sizeof(opt)), "Setsocopt failed");
+    u_int yes = 1;
+    ExitIfTrue(setsockopt(serverSocket, SOL_SOCKET, SO_REUSEADDR, (char* ) &yes, sizeof(yes)) < 0, "Reusing ADDR failed");
 
-    serverAddr.sin_family = AF_INET;
-    serverAddr.sin_addr.s_addr = INADDR_ANY;
-    serverAddr.sin_port = htons(port);
+    memset(&udpServerAddr, 0, sizeof(udpServerAddr));
+    udpServerAddr.sin_family = AF_INET;
+    udpServerAddr.sin_addr.s_addr = inet_addr(this->group.c_str());
+    udpServerAddr.sin_port = htons(port);
+    ExitIfTrue(bind(serverSocket, (const struct sockaddr*) &udpServerAddr, sizeof(udpServerAddr)) < 0, "bind failed");
 
-    ExitIfTrue(bind(serverSocket, (struct sockaddr *)&serverAddr, sizeof(serverAddr)) < 0, "Binding failed");
+    mreq.imr_multiaddr.s_addr = inet_addr(this->group.c_str());
+    mreq.imr_interface.s_addr = htonl(INADDR_ANY);
+    ExitIfTrue(setsockopt(serverSocket, IPPROTO_IP, IP_ADD_MEMBERSHIP, (char*) &mreq, sizeof(mreq)) < 0, "setsockopt error");
 }
 
-void TCPServer::StartListening() {
-    ExitIfTrue(listen(serverSocket, 3) < 0, "Listening failed");
-}
-
-Client TCPServer::AcceptNewClient() {
-    SOCKET clientSocket;
-
-    int serverAddressLen = sizeof(serverAddr);
-    ExitIfTrue((clientSocket = accept(serverSocket, (struct sockaddr *)&serverAddr, (socklen_t*)&serverAddressLen)) < 0, "Accept failed");
-
-    return Client{
-            .clientType = supervisor,
-            .clientSocket = clientSocket
-    };
-}
-
-void TCPServer::ExitIfTrue(bool expr, const std::string& exitMessage) {
+void UDPServer::ExitIfTrue(bool expr, const std::string& exitMessage) {
     if (expr)
     {
         perror(exitMessage.c_str());
@@ -48,10 +43,16 @@ void TCPServer::ExitIfTrue(bool expr, const std::string& exitMessage) {
     }
 }
 
-void TCPServer::SendToClient(Client client, char *message, int messageSize) {
-    send(client.clientSocket, message, messageSize, 0);
-}
+int UDPServer::ReceiveMessage(char *buffer) {
+    socklen_t len = sizeof(clientAddr);
 
-int TCPServer::ReceiveFromClient(Client client, char *buffer) {
-    return read(client.clientSocket, buffer, 1024);
+    int n = recvfrom(serverSocket, (char *)buffer, 4096, 0, (struct sockaddr *)&clientAddr, &len);
+
+    if (n < 0) {
+        return false;
+    }
+
+    buffer[n] = '\0';
+
+    return n;
 }
